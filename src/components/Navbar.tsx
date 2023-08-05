@@ -5,7 +5,6 @@ import { useSession, signOut } from 'next-auth/react'
 
 const Navbar = () => {
     const { data } = useSession()
-    console.log(data)
     return (
         <div className='my-5'>
             <div className="max-w-5xl mx-auto">
