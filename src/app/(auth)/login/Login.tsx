@@ -7,7 +7,7 @@ const Login = () => {
 
 
       {/* <!-- login content --> */}
-      <div className="absolute left-1/2 top-1/2 mx-auto max-w-sm -translate-x-1/2 -translate-y-1/2 transform space-y-4 text-center">
+      <div className="absolute left-1/2 top-1/2 mx-auto md:max-w-sm -translate-x-1/2 -translate-y-1/2 transform space-y-4 text-center">
 
         <div className="space-y-4">
           <header className="mb-3 text-2xl font-bold">Log in</header>
