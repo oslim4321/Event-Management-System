@@ -4,7 +4,7 @@ import React from 'react'
 const Register = () => {
   return (
     <div><main className="relative min-h-screen w-full bg-white">
-      <div className="p-6" x-data="app">
+      <div className="p-6">
         {/* <!-- header --> */}
         <header className="flex w-full justify-between">
 

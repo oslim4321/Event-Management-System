@@ -4,7 +4,7 @@ import React from 'react'
 const Login = () => {
   return (
     <div>
-      <SignUpWithGoggleCompo />
+
 
       {/* <!-- login content --> */}
       <div className="absolute left-1/2 top-1/2 mx-auto max-w-sm -translate-x-1/2 -translate-y-1/2 transform space-y-4 text-center">
@@ -20,6 +20,7 @@ const Login = () => {
           </div>
           <button className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400">LOG IN</button>
         </div>
+        <SignUpWithGoggleCompo />
       </div>
     </div>
   )

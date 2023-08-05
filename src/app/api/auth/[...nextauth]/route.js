@@ -11,6 +11,7 @@ const handler = NextAuth({
       clientId: process.env.Goggle_Client_Id,
       clientSecret: process.env.Goggle_Client_Secret,
     }),
+
     // ...add more providers here
     // CredentialsProvider({
     //   id: "credentials",
