@@ -1,12 +1,8 @@
 import User from "@/model/User";
+import connect from "@/utils/db";
 import { Profile } from 'next-auth';
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
-// import CredentialsProvider from "next-auth/providers/credentials";
-// import connect from "@/utils/db";
-// import Users from "@/models/Users";
-// import bcrypt from "bcryptjs";
 
 interface GoogleProfile extends Profile {
   given_name?: string;
@@ -22,51 +18,34 @@ const handler = NextAuth({
     }),
 
 
-    // ...add more providers here
-    // CredentialsProvider({
-    //   id: "credentials",
-    //   name: "credentials",
-    //   async authorize(credentials) {
-    //     await connect();
-    //     try {
-    //       const user = await Users.findOne({ email: credentials.email });
-    //       if (user) {
-    //         const isPasswordCorrect = await bcrypt.compare(
-    //           credentials.password,
-    //           user.password
-    //         );
-    //         if (isPasswordCorrect) {
-    //           return user;
-    //         } else {
-    //           throw new Error("wrong credentials");
-    //         }
-    //       } else {
-    //         throw new Error("User not found");
-    //       }
-    //     } catch (error) {
-    //       throw new Error(error);
-    //     }
-    //   },
-    // }),
+
   ],
   callbacks: {
     async signIn({ user, profile }): Promise<any> {
+      await connect();
 
       const { email } = user
       const { given_name, family_name, } = profile as GoogleProfile
 
       const existingUser = await User.findOne({ email: email });
-      if (existingUser) {
-        return true
-      }
-      try {
-        const res = await User.create({ email, firstName: given_name, lastName: family_name, password: Math.floor(Math.random() * 3000) })
-        console.log(res)
-      } catch (error) {
-        console.log(error)
+      const generateRandomPass = Math.floor(Math.random() * 3004840)
+      // const password = await bcrypt.hash(generateRandomPass, 10);
+      if (!existingUser) {
+        try {
+          const res = await User.create({ email, firstName: given_name, lastName: family_name, generateRandomPass })
+          return Promise.resolve(true);
+
+
+        } catch (error) {
+          console.log(error)
+          return Promise.resolve(false);
+
+        }
+
       }
 
       // console.log(user, profile, email, 'lolo weeee')
+      console.log('loging in again')
       return true;
     },
   },
