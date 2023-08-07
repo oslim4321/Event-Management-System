@@ -1,0 +1,23 @@
+{
+"\_id": "unique_event_id",
+"eventName": "Music Concert",
+"eventDate": "2023-08-15",
+"eventLocation": "Venue ABC",
+"eventDescription": "Join us for a night of live music!",
+"eventCategory": "Music",
+"ticketPrice": "$50",
+"performers": ["Artist A", "Artist B"],
+"seatingArrangements": "General Admission",
+"guestCount": 200,
+"attire": "Casual",
+"specialInstructions": "No outside food or drinks allowed",
+
+"\_id": "unique_id_2",
+"eventName": "Event 2",
+"eventDate": "2023-09-10",
+"eventLocation": "Location 2",
+"eventDescription": "Description for Event 2",
+"eventCategory": "Category 2",
+"eventField1": "Value 3",
+"eventField2": "Value 4"
+},

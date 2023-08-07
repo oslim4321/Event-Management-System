@@ -27,30 +27,26 @@ const handler = NextAuth({
           email: string,
           password: string,
         };
-        await connect()
+
         try {
+          await connect();
           const user: UserTypeModel | null = await User.findOne({ email });
 
-          if (user) {
-            const isPasswordCorrect: boolean = await bcrypt.compare(
-              password,
-              user.password
-            );
-
-            if (isPasswordCorrect) {
-              // return user as UserTypeModel
-              return Promise.resolve(user);
-
-            } else {
-              throw new Error("wrong credentials");
-            }
-          } else {
-            throw new Error('User not Found')
+          if (!user) {
+            throw new Error('User not Found');
           }
-        } catch (error) {
-          console.log(error)
-          throw new Error(error as string);
 
+          const isPasswordCorrect: boolean = await bcrypt.compare(password, user.password);
+
+          if (!isPasswordCorrect) {
+            throw new Error('Wrong credentials');
+          }
+
+          return user; // Return the authenticated user
+
+        } catch (error) {
+          console.error(error);
+          throw new Error(error as string);
         }
       }
     })
@@ -90,7 +86,7 @@ const handler = NextAuth({
     },
     async session({ session, user, token }): Promise<any> {
       const newUser = await User.findOne({ email: token.email })
-      return { ...session, newUser }
+      return { ...session, newUser, token }
     }
   },
 
