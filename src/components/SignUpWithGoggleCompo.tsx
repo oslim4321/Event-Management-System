@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react'
 
 const SignUpWithGoggleCompo = () => {
   const session = useSession();
-  console.log(session)
   return (
     <div>
       <div className="flex items-center space-x-4">

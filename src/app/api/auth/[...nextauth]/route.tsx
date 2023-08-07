@@ -5,6 +5,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcryptjs'
+import { UserTypeModel } from "@/utils/typescriptModel";
 
 interface GoogleProfile extends Profile {
   given_name?: string;
@@ -21,33 +22,35 @@ const handler = NextAuth({
     CredentialsProvider({
       id: 'credentials',
       name: 'credentials',
-      async authorize(credentials, req) {
+      authorize: async (credentials, req) => {
         const { email, password } = credentials as {
           email: string,
           password: string,
         };
         await connect()
         try {
-          const user = await User.findOne({ email });
-          console.log(user, 'user')
+          const user: UserTypeModel | null = await User.findOne({ email });
+
           if (user) {
-            const isPasswordCorrect = await bcrypt.compare(
+            const isPasswordCorrect: boolean = await bcrypt.compare(
               password,
               user.password
             );
 
             if (isPasswordCorrect) {
-              console.log('password in correct')
+              // return user as UserTypeModel
+              return Promise.resolve(user);
+
+            } else {
+              throw new Error("wrong credentials");
             }
-            console.log('you logged in')
-
-
           } else {
-            throw new Error('User Not Found')
+            throw new Error('User not Found')
           }
         } catch (error) {
           console.log(error)
-          return false
+          throw new Error(error as string);
+
         }
       }
     })
@@ -57,20 +60,22 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user, profile }): Promise<any> {
+      if (profile) {
+        console.log('t is true')
+      } else {
+        console.log('not worng')
+      }
       await connect();
 
       const { email } = user
-      const { given_name, family_name, } = profile as GoogleProfile
-
       const existingUser = await User.findOne({ email: email });
-      const generateRandomPass = Math.floor(Math.random() * 3004840)
-      const password = await bcrypt.hash(generateRandomPass, 10);
       if (!existingUser) {
+        const { given_name, family_name, } = profile as GoogleProfile
+        const generateRandomPass = Math.floor(Math.random() * 3004840).toString(); // Convert to string
+        const password = await bcrypt.hash(generateRandomPass, 10);
         try {
           const res = await User.create({ email, firstName: given_name, lastName: family_name, password })
-          return Promise.resolve(true);
-
-
+          return res;
         } catch (error) {
           console.log(error)
           return Promise.resolve(false);
@@ -81,13 +86,17 @@ const handler = NextAuth({
 
       // console.log(user, profile, email, 'lolo weeee')
       console.log('loging in again')
-      return true;
+      return existingUser;
     },
+    async session({ session, user, token }): Promise<any> {
+      const newUser = await User.findOne({ email: token.email })
+      return { ...session, newUser }
+    }
   },
 
 
   pages: {
-    error: "/dashboard/login",
+    error: "/login",
   },
 });
 

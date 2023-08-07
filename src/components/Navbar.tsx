@@ -2,9 +2,12 @@
 import Link from 'next/link'
 import React from 'react'
 import { useSession, signOut } from 'next-auth/react'
+import { UserTypeModel } from '@/utils/typescriptModel'
 
 const Navbar = () => {
+    // const { data } = useSession()
     const { data } = useSession()
+
     return (
         <div className='my-5'>
             <div className="max-w-5xl mx-auto">
@@ -55,7 +58,11 @@ const Navbar = () => {
 export default Navbar
 
 const AuthNav = () => {
+    const session = useSession();
+    console.log(session)
     const { data, status } = useSession();
+    const latestUser = data?.newUser as UserTypeModel;
+
 
     // Placeholder signOut function
     const signOutClick = () => {
@@ -87,7 +94,7 @@ const AuthNav = () => {
             )}
             <li>
                 <span className="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-blue-700 md:p-0">
-                    Hi {data?.user?.name || 'Guest'}
+                    Hi {latestUser?.firstName || 'Guest'}
                 </span>
             </li>
         </ul>
