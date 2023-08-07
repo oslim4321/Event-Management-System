@@ -1,7 +1,24 @@
+"use client"
 import SignUpWithGoggleCompo from '@/components/SignUpWithGoggleCompo'
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
+import { DataState } from '../register/Register'
+import { signIn } from 'next-auth/react'
 
 const Login = () => {
+  const [data, setdata] = useState<DataState>({})
+  function handleChange(e: ChangeEvent<HTMLElement>) {
+    const target = e.target as HTMLInputElement
+    const name = target.name
+    const val = target.value
+
+    setdata((prevData) => ({ ...prevData, [name]: val }))
+  }
+
+  function handleClick() {
+    console.log(data)
+    const { email, password } = data as { email: string, password: string }
+    signIn('credentials', { email, password })
+  }
   return (
     <div>
 
@@ -12,13 +29,13 @@ const Login = () => {
         <div className="space-y-4">
           <header className="mb-3 text-2xl font-bold">Log in</header>
           <div className="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
-            <input type="text" placeholder="Email or username" className="my-3 w-full border-none bg-transparent outline-none focus:outline-none" />
+            <input type="text" placeholder="Email or username" name='email' className="my-3 w-full border-none bg-transparent outline-none focus:outline-none" onChange={handleChange} />
           </div>
           <div className="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
-            <input type="password" placeholder="Password" className="my-3 w-full border-none bg-transparent outline-none" />
+            <input type="password" placeholder="Password" name='password' className="my-3 w-full border-none bg-transparent outline-none" onChange={handleChange} />
             <a href="#" className="font-medium text-gray-400 hover:text-gray-500">FORGOT?</a>
           </div>
-          <button className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400">LOG IN</button>
+          <button className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400" onClick={handleClick} >LOG IN</button>
         </div>
         <SignUpWithGoggleCompo />
       </div>

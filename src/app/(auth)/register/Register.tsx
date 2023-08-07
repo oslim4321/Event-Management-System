@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 
-type DataState = {
+export type DataState = {
   [key: string]: string | undefined
 }
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
     try {
       const res = await axios.post(`/api/auth/register`, data)
       // console.log(res)
-      if (res.data.message === 'User created success') {
+      if (res.data) {
         route.push('/login')
       }
     } catch (error) {
