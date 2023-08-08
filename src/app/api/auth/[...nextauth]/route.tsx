@@ -12,7 +12,7 @@ interface GoogleProfile extends Profile {
   family_name?: string;
   // Add any other properties you expect to find in the Google profile
 }
-const handler = NextAuth({
+export const handler = NextAuth({
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -26,8 +26,9 @@ const handler = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
-      authorize: async (credentials, req) => {
-        const { email, password } = credentials as a
+      // the actual credential sighin
+      async authorize(credentials: any) {
+        const { email, password } = credentials as any
 
         try {
           await connect();
@@ -58,12 +59,12 @@ const handler = NextAuth({
       }
     })
 
-
-
-
-
   ],
+  session: {
+    strategy: 'jwt'
+  },
   callbacks: {
+    // sign up iser if it is frst time signing in
     async signIn({ user, profile }): Promise<any> {
 
       await connect();
@@ -92,7 +93,8 @@ const handler = NextAuth({
     async session({ session, user, token }): Promise<any> {
       const newUser = await User.findOne({ email: token.email })
       return { ...session, newUser, token }
-    }
+    },
+
   },
 
 
