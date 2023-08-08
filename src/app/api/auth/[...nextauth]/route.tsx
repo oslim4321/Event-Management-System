@@ -22,45 +22,50 @@ const handler = NextAuth({
     CredentialsProvider({
       id: 'credentials',
       name: 'credentials',
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
       authorize: async (credentials, req) => {
-        const { email, password } = credentials as {
-          email: string,
-          password: string,
-        };
+        const { email, password } = credentials as a
 
         try {
           await connect();
           const user: UserTypeModel | null = await User.findOne({ email });
 
           if (!user) {
-            throw new Error('User not Found');
+            return null
+            // throw new Error('User not Found');
+          } else {
+            const isPasswordCorrect: boolean = await bcrypt.compare(password, user.password);
+
+            if (!isPasswordCorrect) {
+              return null
+              // throw new Error('Wrong credentials');
+            } else {
+              return user; // Return the authenticated user
+            }
+
           }
+          return null
 
-          const isPasswordCorrect: boolean = await bcrypt.compare(password, user.password);
-
-          if (!isPasswordCorrect) {
-            throw new Error('Wrong credentials');
-          }
-
-          return user; // Return the authenticated user
 
         } catch (error) {
           console.error(error);
-          throw new Error(error as string);
+          return null
+          // throw new Error(error as string);
         }
       }
     })
 
 
 
+
+
   ],
   callbacks: {
     async signIn({ user, profile }): Promise<any> {
-      if (profile) {
-        console.log('t is true')
-      } else {
-        console.log('not worng')
-      }
+
       await connect();
 
       const { email } = user
