@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth'
 import React from 'react'
 import { handler } from '../api/auth/[...nextauth]/route'
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 
 type UserSch = {
@@ -12,7 +13,8 @@ type UserSch = {
 const page = async () => {
     const session: any = await getServerSession(handler)
     if (!session) {
-        return <div className='text-center text-4xl'>Please login</div>
+        // return <div className='text-center text-4xl'>Please login</div>
+        redirect('/login?callbackURL=/protected/server')
     }
     return (
 
