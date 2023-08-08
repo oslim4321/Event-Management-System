@@ -25,7 +25,7 @@ const CreateEventComp = () => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const handleSubmit = (e: SubmitEvent) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Send formData to your API endpoint
         console.log(formData);
@@ -36,7 +36,7 @@ const CreateEventComp = () => {
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
             <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
                 <h1 className="text-2xl font-semibold mb-4">Create Event</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 font-semibold mb-1">Event Type</label>
                         <select
@@ -55,7 +55,7 @@ const CreateEventComp = () => {
                     </div>
                     {/* Add other input fields here */}
                     <button
-                        onClick={handleSubmit} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+                        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
                     >
                         Create Event
                     </button>
