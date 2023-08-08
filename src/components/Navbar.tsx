@@ -1,4 +1,5 @@
 "use client"
+import { UserTypeModel } from "@/utils/typescriptModel";
 import { signOut, useSession } from "next-auth/react";
 // import Link from 'next/link'
 // import React from 'react'
@@ -148,9 +149,14 @@ export default Navbar;
 
 
 const Option = () => {
+    // interface Session {
+    //     // other properties...
+    //     newUser?: UserTypeModel
+    // }
+
     const session = useSession();
     console.log(session)
-    const { data, status } = useSession();
+    const { data, status }: any = useSession();
     // const latestUser = data?.newUser;
     const [popUp, setpopUp] = useState(false);
 
