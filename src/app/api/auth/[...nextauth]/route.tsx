@@ -12,6 +12,11 @@ interface GoogleProfile extends Profile {
   family_name?: string;
   // Add any other properties you expect to find in the Google profile
 }
+
+interface ICredential {
+  email: string,
+  password: string
+}
 export const handler = NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -22,13 +27,15 @@ export const handler = NextAuth({
     CredentialsProvider({
       id: 'credentials',
       name: 'credentials',
+      type: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        email: { label: "Email", type: "text5" },
         password: { label: "Password", type: "password" }
       },
       // the actual credential sighin
-      async authorize(credentials: any) {
-        const { email, password } = credentials as any
+      // @ts-ignore
+      async authorize(credentials, req) {
+        const { email, password } = credentials as ICredential;
 
         try {
           await connect();
