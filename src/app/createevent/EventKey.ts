@@ -25,10 +25,7 @@ export const eventInput = [
             name: 'image',
             title: 'Image'
         },
-        {
-            name: 'eventType',
-            title: 'Event Type'
-        },
+    
         {
             name: 'eventName',
             title: 'Event Name'

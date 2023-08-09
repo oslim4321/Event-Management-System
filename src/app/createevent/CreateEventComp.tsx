@@ -1,18 +1,23 @@
 "use client"
 import React, { ChangeEvent, useState } from 'react'
 import { SpecialEventKey, eventInput } from './EventKey';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 interface SpecialEvent {
     [eventName: string]: string[];
 }
 
 const CreateEventComp = () => {
     const [inputs, setinputs] = useState<any>();
+    const [data, setdata] = useState<any>()
+    const router = useRouter()
 
 
 
     const handleChange = (e: ChangeEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        // setFormData((prevData) => ({ ...prevData, [name]: value }));
+        setdata((prev: typeof data) => ({ ...prev, ['eventType']: value }))
+
         console.log(value)
         SpecialEventKey.forEach((elem: SpecialEvent) => {
 
@@ -22,11 +27,27 @@ const CreateEventComp = () => {
         })
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(data)
         // Send formData to your API endpoint
-
+        try {
+            const res: any = await axios.post('/api/event/createEvent/', data)
+            console.log(res)
+            if (res.data?.message) {
+                router.push('/')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     };
+
+    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+        console.log(e.target.name, ':', e.target.value)
+        const name = e.target.name
+        const val = e.target.value
+        setdata((prev: typeof data) => ({ ...prev, [name]: val }))
+    }
 
 
     return (
@@ -51,8 +72,8 @@ const CreateEventComp = () => {
                         </select>
 
                     </div>
-                    <SpecialEvent inputs={inputs} />
-                    <AllEventKeys />
+                    <SpecialEvent inputs={inputs} handleInputChange={handleInputChange} />
+                    <AllEventKeys handleInputChange={handleInputChange} />
 
                     {/* Add other input fields here */}
                     <button
@@ -69,7 +90,7 @@ const CreateEventComp = () => {
 
 export default CreateEventComp
 
-const SpecialEvent = ({ inputs }: { inputs: string[] }) => {
+const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleInputChange: React.ChangeEventHandler<HTMLInputElement> }) => {
     return (
         <div>
             {
@@ -77,7 +98,7 @@ const SpecialEvent = ({ inputs }: { inputs: string[] }) => {
                     // console.log(elem, 'element')
                     < div className="mb-4" key={elem}>
                         <label className="block text-gray-700 font-semibold mb-1 capitalize">{elem}</label>
-                        <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
+                        <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
                     </div>
                 ))
             }
@@ -85,14 +106,14 @@ const SpecialEvent = ({ inputs }: { inputs: string[] }) => {
     )
 }
 
-const AllEventKeys = () => {
+const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEventHandler }) => {
 
     return (
         <div>
             {eventInput.map((event) => (
                 < div className="mb-4" key={event.name}>
                     <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
-                    <input type="text" name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
+                    <input type="text" name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
                 </div>
             ))}
 
