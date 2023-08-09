@@ -1,6 +1,6 @@
 "use client"
 import React, { ChangeEvent, useState } from 'react'
-import { SpecialEventKey } from './EventKey';
+import { SpecialEventKey, eventInput } from './EventKey';
 interface SpecialEvent {
     [eventName: string]: string[];
 }
@@ -31,7 +31,7 @@ const CreateEventComp = () => {
 
     return (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+            <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg my-5">
                 <h1 className="text-2xl font-semibold mb-4">Create Event</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -49,17 +49,10 @@ const CreateEventComp = () => {
                             <option value="Burial">Burial</option>
                             <option value="Other">Other</option>
                         </select>
-                    </div>
-                    {
-                        inputs?.map((elem: any) => (
-                            // console.log(elem, 'element')
-                            < div className="mb-4" key={elem}>
-                                <label className="block text-gray-700 font-semibold mb-1 capitalize">{elem}</label>
-                                <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
-                            </div>
-                        ))
-                    }
 
+                    </div>
+                    <SpecialEvent inputs={inputs} />
+                    <AllEventKeys />
 
                     {/* Add other input fields here */}
                     <button
@@ -75,3 +68,34 @@ const CreateEventComp = () => {
 
 
 export default CreateEventComp
+
+const SpecialEvent = ({ inputs }: { inputs: string[] }) => {
+    return (
+        <div>
+            {
+                inputs?.map((elem: string) => (
+                    // console.log(elem, 'element')
+                    < div className="mb-4" key={elem}>
+                        <label className="block text-gray-700 font-semibold mb-1 capitalize">{elem}</label>
+                        <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
+                    </div>
+                ))
+            }
+        </div>
+    )
+}
+
+const AllEventKeys = () => {
+
+    return (
+        <div>
+            {eventInput.map((event) => (
+                < div className="mb-4" key={event.name}>
+                    <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
+                    <input type="text" name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
+                </div>
+            ))}
+
+        </div>
+    )
+}

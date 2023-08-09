@@ -18,3 +18,43 @@ export const SpecialEventKey= [
         ]
     }
 ]
+
+
+export const eventInput = [
+        {
+            name: 'image',
+            title: 'Image'
+        },
+        {
+            name: 'eventType',
+            title: 'Event Type'
+        },
+        {
+            name: 'eventName',
+            title: 'Event Name'
+        },
+        {
+            name: 'eventDate',
+            title: 'Date'
+        },
+        {
+            name: 'eventLocation',
+            title: 'Event Location'
+        },
+        {
+            name: 'organizer',
+            title: 'Event organizer'
+        },
+        {
+            name: 'attire',
+            title: 'Attire'
+        },
+        {
+            name: 'guestCount',
+            title: 'Guest Count'
+        },
+        {
+            name: 'specialInstructions',
+            title: 'special Instructions'
+        },
+    ]
