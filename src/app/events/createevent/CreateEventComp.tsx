@@ -1,34 +1,31 @@
 "use client"
 import React, { ChangeEvent, useState } from 'react'
+import { SpecialEventKey } from './EventKey';
+interface SpecialEvent {
+    [eventName: string]: string[];
+}
 
 const CreateEventComp = () => {
+    const [inputs, setinputs] = useState<any>();
 
-    const [formData, setFormData] = useState({
-        image: '',
-        eventType: '',
-        eventName: '',
-        eventDate: '',
-        eventLocation: '',
-        brideName: '',
-        groomName: '',
-        tributeDetails: '',
-        funeralProgram: '',
-        celebrantName: '',
-        age: '',
-        musicianNames: '',
-        musicGenre: '',
-        // ... other fields
-    });
+
 
     const handleChange = (e: ChangeEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
+        // setFormData((prevData) => ({ ...prevData, [name]: value }));
+        console.log(value)
+        SpecialEventKey.forEach((elem: SpecialEvent) => {
+
+            if (elem[value]) {
+                setinputs(elem[value])
+            }
+        })
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Send formData to your API endpoint
-        console.log(formData);
+
     };
 
 
@@ -42,7 +39,7 @@ const CreateEventComp = () => {
                         <select
                             name="eventType"
                             className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
-                            value={formData.eventType}
+                            // value={formData.eventType}
                             onChange={handleChange}
                         >
                             <option value="">Select Event Type</option>
@@ -53,6 +50,17 @@ const CreateEventComp = () => {
                             <option value="Other">Other</option>
                         </select>
                     </div>
+                    {
+                        inputs?.map((elem: any) => (
+                            // console.log(elem, 'element')
+                            < div className="mb-4" key={elem}>
+                                <label className="block text-gray-700 font-semibold mb-1 capitalize">{elem}</label>
+                                <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" />
+                            </div>
+                        ))
+                    }
+
+
                     {/* Add other input fields here */}
                     <button
                         className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"

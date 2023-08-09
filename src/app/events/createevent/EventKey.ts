@@ -1,5 +1,9 @@
-const SpecialEventKey = [
+
+export const SpecialEventKey= [
     {
+        Wedding: [
+              'musicianNames',
+        ],
         Birthday: [
             'celebrantName',
             'age'
