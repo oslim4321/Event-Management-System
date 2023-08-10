@@ -25,8 +25,8 @@ export const POST = async (request: Request) => {
         if (!session) {
             return NextResponse.json({
                 error: "You must be signed in to view the protected content on this page.",
-                status: 404
-            })
+
+            }, { status: 404 })
 
         }
         // find the organize in user DB
@@ -47,8 +47,8 @@ export const POST = async (request: Request) => {
         })
     } catch (error) {
         return NextResponse.json({
-            error: "error occur" + error
-        })
+            error: "error occur " + error
+        }, { status: 500 })
 
     }
 

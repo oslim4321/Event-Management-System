@@ -48,7 +48,7 @@ const page = async () => {
                 Event Page must be protected */}
 
                 <div className='flex justify-end'>
-                    <Link href='events/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
+                    <Link href='/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
                 </div>
                 <EventCard eventData={data} />
             </div>

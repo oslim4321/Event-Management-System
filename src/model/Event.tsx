@@ -21,7 +21,7 @@ const eventSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        eventDeesc: {
+        eventDesc: {
             type: String,
             required: true,
         },

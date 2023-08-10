@@ -12,9 +12,10 @@ export const SpecialEventKey= [
             'tributeDetails',
             'musicianNames'
         ],
-        Musicial: [
+        Musical: [
             'musicianNames',
-            'musicGenre'
+            'musicGenre',
+            'ticketPrice'
         ]
     }
 ]
@@ -53,5 +54,9 @@ export const eventInput = [
         {
             name: 'specialInstructions',
             title: 'special Instructions'
+        },
+        {
+            name: 'eventDesc',
+            title: 'Event Description'
         },
     ]

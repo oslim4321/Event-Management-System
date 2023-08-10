@@ -66,7 +66,7 @@ const CreateEventComp = () => {
                             <option value="">Select Event Type</option>
                             <option value="Wedding">Wedding</option>
                             <option value="Birthday">Birthday</option>
-                            <option value="Musicial">Musicial</option>
+                            <option value="Musical">Musical</option>
                             <option value="Burial">Burial</option>
                             <option value="Other">Other</option>
                         </select>
@@ -98,7 +98,7 @@ const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleI
                     // console.log(elem, 'element')
                     < div className="mb-4" key={elem}>
                         <label className="block text-gray-700 font-semibold mb-1 capitalize">{elem}</label>
-                        <input type="text" name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
+                        <input type={elem === 'ticketPrice' ? 'number' : "text"} name={elem} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
                     </div>
                 ))
             }
@@ -112,11 +112,23 @@ const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEv
         <div>
             {eventInput.map((event) => (
                 < div className="mb-4" key={event.name}>
-                    <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
-                    <input type="text" name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
-                </div>
-            ))}
+                    {
+                        event.name === 'eventDesc' ?
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
+                                <textarea name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} cols={parseInt("30")} rows={parseInt("10")}></textarea>
+                            </div>
+                            :
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
+                                <input type="text" name={event.name} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange} />
+                            </div>
 
-        </div>
+                    }
+                </div>
+            ))
+            }
+
+        </div >
     )
 }
