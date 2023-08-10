@@ -21,6 +21,10 @@ const eventSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        eventDeesc: {
+            type: String,
+            required: true,
+        },
         eventDate: {
             type: Date,
             required: true,
