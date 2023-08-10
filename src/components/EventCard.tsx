@@ -3,8 +3,6 @@ import React from 'react'
 import { ImgComp } from './ImageComp'
 
 const EventCard = ({ eventData }: { eventData: EventTypeModel[] }) => {
-    console.log('good')
-    console.log(eventData)
     return (
         <div>
             <div>
@@ -12,10 +10,10 @@ const EventCard = ({ eventData }: { eventData: EventTypeModel[] }) => {
                     {
                         eventData?.map((elem): any => {
                             return (
-                                <div className="max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer">
-                                    <div>
+                                <div className="max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer w-[300px]">
+                                    <div className='w-full h-[50%]'>
                                         {/* <img src={elem.image} alt="" /> */}
-                                        <ImgComp src={elem.image} alt={elem.eventName} className='w-full' width='' />
+                                        <ImgComp src={elem.image} alt={elem.eventName} className='w-full h-full' width='' />
                                     </div>
                                     <div className="py-4 px-4 bg-white">
                                         <h3 className="text-lg font-semibold text-gray-600">{elem.eventName}</h3>

@@ -1,11 +1,8 @@
 import { getServerSession } from 'next-auth'
 import React from 'react'
-import { handler } from '../api/auth/[...nextauth]/route'
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import EventCard from '@/components/EventCard';
 import axios from 'axios';
-import { EventTypeModel } from '@/utils/typescriptModel';
 
 
 type UserSch = {
@@ -15,7 +12,6 @@ type UserSch = {
 };
 
 const getData = async () => {
-    console.log(process.env.BASE_URL + '/api/event')
     try {
         const res: any = await axios.get(process.env.BASE_URL + '/api/event')
         if (!res?.ok) {
@@ -30,7 +26,6 @@ const getData = async () => {
 const page = async () => {
 
     const { data } = await getData()
-    console.log(data, 'data')
 
 
     // const session: any = await getServerSession(handler)
