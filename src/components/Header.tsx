@@ -49,7 +49,6 @@ export default Header;
 
 const User = async () => {
     const session: any = await getServerSession(handler)
-    console.log(session)
     return (
         <div>
             {

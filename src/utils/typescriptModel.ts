@@ -30,3 +30,8 @@ export type EventTypeModel = {
   updatedAt: string;
   __v: number;
 };
+export type serverUser = {
+  name?: string,
+  email?: string,
+  image?: string
+}
