@@ -1,5 +1,4 @@
 import React from 'react'
-import Profile from './Profile'
 import axios from 'axios'
 import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
@@ -73,7 +72,6 @@ const page = async () => {
 
 
 
-            <Profile />
         </div>
     )
 }
