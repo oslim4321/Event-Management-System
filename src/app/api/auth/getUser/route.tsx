@@ -6,7 +6,7 @@ export const POST = async (request: Request) => {
 
     try {
         const { data } = await request.json()
-        console.log(data, 'data')
+
         if (!data.email) {
             return NextResponse.json({ message: 'user not found' }, { status: 404 })
 
