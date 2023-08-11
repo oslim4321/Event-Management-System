@@ -11,8 +11,8 @@ const getCurrentUser = async () => {
         const { user }: serverUser | any = await getServerSession(handler)
         const email: string = user?.email
         const { data }: any = await axios.post(process.env.BASE_URL + '/api/auth/getUser', { data: { email } })
-            `        // console.log(data.message, 'mee')
-`        return data.message
+        // console.log(data.message, 'mee')
+        return data.message
     } catch (error) {
         return error
     }
