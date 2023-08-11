@@ -6,13 +6,13 @@ import { handler } from '../api/auth/[...nextauth]/route'
 import { serverUser } from '@/utils/typescriptModel'
 import LogoutButton from '@/components/LogoutButton'
 
-export const getCurrentUser = async () => {
+const getCurrentUser = async () => {
     try {
         const { user }: serverUser | any = await getServerSession(handler)
         const email: string = user?.email
         const { data }: any = await axios.post(process.env.BASE_URL + '/api/auth/getUser', { data: { email } })
-        // console.log(data.message, 'mee')
-        return data.message
+            `        // console.log(data.message, 'mee')
+`        return data.message
     } catch (error) {
         return error
     }
