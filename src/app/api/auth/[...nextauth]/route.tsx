@@ -1,6 +1,6 @@
 import User from "@/model/User";
 import connect from "@/utils/db";
-import { Profile } from 'next-auth';
+import { Profile, getServerSession } from 'next-auth';
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -101,11 +101,13 @@ export const handler = NextAuth({
       const newUser = await User.findOne({ email: token.email })
       return { ...session, newUser, token }
     },
+    // ts-ignore
 
   },
 
 
   pages: {
+    signIn: "/login",
     error: "/login",
   },
 });

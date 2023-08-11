@@ -1,9 +1,6 @@
 
-import { UserTypeModel } from "@/utils/typescriptModel";
-import { signOut, useSession } from "next-auth/react";
+
 import Link from "next/link";
-import { useState } from "react";
-import ShowUserStateAuth from "./ShowUserStateAuth";
 import { getServerSession } from "next-auth";
 import { handler } from "@/app/api/auth/[...nextauth]/route";
 import { Option } from "./HeaderOption";
@@ -57,7 +54,7 @@ const User = async () => {
         <div>
             {
                 session ?
-                    <p> {session?.user.email}</p>
+                    <Link href='dashboard'><span className="text-white hover:text-blue-300"> {session?.user.name || session?.user?.email}</span></Link>
                     :
                     <Option />
             }

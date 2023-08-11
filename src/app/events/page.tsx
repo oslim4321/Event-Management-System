@@ -20,6 +20,7 @@ const getData = async () => {
         return res.data
     } catch (error) {
         console.log(error, 'error')
+        throw Error('failed fetch data on')
         return error
     }
 }
@@ -43,7 +44,7 @@ const page = async () => {
                 Event Page must be protected */}
 
                 <div className='flex justify-end'>
-                    <Link href='/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
+                    <Link href='/events/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
                 </div>
                 <EventCard eventData={data} />
             </div>
@@ -54,3 +55,5 @@ const page = async () => {
 }
 
 export default page
+
+

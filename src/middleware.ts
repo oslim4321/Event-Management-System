@@ -1,4 +1,4 @@
 export { default } from 'next-auth/middleware'
 
 
-export const config = {matcher: [ '/events']}
+export const config = {matcher: [ '/events', '/dashboard']}
