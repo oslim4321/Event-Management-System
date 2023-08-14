@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
 import { serverUser } from '@/utils/typescriptModel'
 import LogoutButton from '@/components/LogoutButton'
+import ListMyEvent from './ListMyEvent'
 
 const getCurrentUser = async () => {
     try {
@@ -21,10 +22,7 @@ const page = async () => {
     const data = await getCurrentUser()
     return (
         <div>
-            hello
-            {
-                data.firstName
-            }
+
             <div className='max-w-[80%] mx-auto'>
                 <div className="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
                     <div className="md:col-span-1 h-48 shadow-xl ">
@@ -69,6 +67,8 @@ const page = async () => {
 
                 </div>
             </div>
+
+            <ListMyEvent />
 
 
 

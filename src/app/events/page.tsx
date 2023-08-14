@@ -21,7 +21,7 @@ const getData = async () => {
     } catch (error) {
         console.log(error, 'error')
         throw Error('failed fetch data on')
-        return error
+
     }
 }
 const page = async () => {
@@ -47,6 +47,8 @@ const page = async () => {
                     <Link href='/events/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
                 </div>
                 <EventCard eventData={data} />
+                {/* My events */}
+
             </div>
 
         </div>
