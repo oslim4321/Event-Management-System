@@ -18,24 +18,24 @@ type SessionType = {
 
 
 export const POST = async (request: Request) => {
-    const session: any = await getServerSession<any>(handler);
+    // const session: any = await getServerSession<any>(handler);
     try {
         await connect()
         // console.log(session)
-        if (!session) {
-            return NextResponse.json({
-                error: "You must be signed in to view the protected content on this page.",
+        // if (!session) {
+        //     return NextResponse.json({
+        //         error: "You must be signed in to view the protected content on this page.",
 
-            }, { status: 404 })
+        //     }, { status: 404 })
 
-        }
+        // }
         // find the organize in user DB
 
-        const organizer = await User.findOne({ email: session['user'].email });
-        // throw error if not found
-        if (!organizer) {
-            return NextResponse.json({ error: 'user mot found' })
-        }
+        // const organizer = await User.findOne({ email: session['user'].email });
+        // // throw error if not found
+        // if (!organizer) {
+        //     return NextResponse.json({ error: 'user mot found' })
+        // }
         const eventProps = await request.json()
 
         // create user Event Immediately

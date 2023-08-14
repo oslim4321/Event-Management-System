@@ -6,7 +6,7 @@ export const GET = async (request: Request, { params }: any) => {
     const { eventId } = params;
     try {
         connect()
-        const userEvent = await Event.findOne({ organizer: eventId })
+        const userEvent = await Event.find({ organizer: eventId })
         console.log(userEvent)
 
         return NextResponse.json(userEvent)
