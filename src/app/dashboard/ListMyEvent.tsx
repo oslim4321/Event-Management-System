@@ -1,21 +1,34 @@
 "use client"
-
+import React, { useState } from 'react'
+import Spinner from '@/components/Spinner'
+import axios from 'axios'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import { EventTypeModel, UserTypeModel } from '@/utils/typescriptModel'
 
 const ListMyEvent = () => {
+    const [loading, setloading] = useState(false)
+    const [data, setdata] = useState([]);
     const session = useSession()
     console.log(session)
     async function handleFetchData() {
-        // const res = await fetch('/api/event/id')
-
+        setloading(true)
+        try {                                                 //@ts-ignore
+            const res = await axios.get('/api/event/' + session?.data?.newUser?._id)
+            console.log(res)
+            setdata(res.data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false)
+        }
     }
-
+    console.log(data)
 
     return (
         <>
             <button onClick={handleFetchData}>See my Events</button>
-            <div className="flex flex-col">
+            <Spinner loading={loading} />
+            {!loading && data.length > 1 ? <div className="flex flex-col">
                 <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div className="overflow-hidden">
@@ -26,80 +39,47 @@ const ListMyEvent = () => {
                                             #
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            First
+                                            Event Name
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Last
+                                            Location
                                         </th>
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                            Handle
+                                            Category
+                                        </th>
+                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Date
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Mark
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Otto
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            @mdo
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Jacob
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Thornton
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            @fat
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                                        <td colSpan={Number(2)} className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Larry
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            @twitter
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Whitney
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Austin
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            @mdo
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Ted
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            Obama
-                                        </td>
-                                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            @fat
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                {data.map((elem: EventTypeModel, i) => (
+                                    < tbody >
+                                        <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{i + 1}</td>
+                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {elem?.eventName}
+                                            </td>
+                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {elem.eventLocation}
+                                            </td>
+                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {elem?.eventType}
+                                            </td>
+                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                {elem?.eventDate}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                ))
+                                }
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> :
+                <p>Cant Get Any Event</p>
+            }
         </>
     )
 }

@@ -17,6 +17,10 @@ const getCurrentUser = async () => {
         return error
     }
 }
+export const metadata = {
+    title: "Dashboard page",
+    description: "this is oslim Event manager Dashboard page",
+};
 
 const page = async () => {
     const data = await getCurrentUser()

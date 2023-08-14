@@ -108,7 +108,7 @@ export const handler = NextAuth({
 
   pages: {
     signIn: "/login",
-    error: "/login",
+    error: "/error",
   },
 });
 
