@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { handler } from "@/app/api/auth/[...nextauth]/route";
 import { Option } from "./HeaderOption";
+import { getSession } from "next-auth/react";
 
 const Header = () => {
     return (

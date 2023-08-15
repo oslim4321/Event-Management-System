@@ -3,13 +3,12 @@ import React, { useState } from 'react'
 import Spinner from '@/components/Spinner'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
-import { EventTypeModel, UserTypeModel } from '@/utils/typescriptModel'
+import { EventTypeModel } from '@/utils/typescriptModel'
 
 const ListMyEvent = () => {
     const [loading, setloading] = useState(false)
     const [data, setdata] = useState([]);
     const session = useSession()
-    console.log(session)
     async function handleFetchData() {
         setloading(true)
         try {                                                 //@ts-ignore
