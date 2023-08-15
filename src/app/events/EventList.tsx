@@ -5,6 +5,8 @@ import { EventTypeModel } from '@/utils/typescriptModel'
 import React, { useState } from 'react'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
+    const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
+    console.log(dd, 'dd')
     return (
         <div>
             <div className="focus:outline-none">

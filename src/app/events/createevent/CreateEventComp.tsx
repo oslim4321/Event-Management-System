@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
+import { format, parseISO } from 'date-fns'
 
 
 interface SpecialEvent {
@@ -15,6 +16,7 @@ const CreateEventComp = () => {
     const [inputs, setinputs] = useState<any>();
     const [data, setdata] = useState<any>()
     const router = useRouter()
+    const [selectedDateTime, setSelectedDateTime] = useState<Date | undefined>(undefined);
 
 
 
@@ -34,7 +36,8 @@ const CreateEventComp = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(data)
-        // Send formData to your API endpoint
+        console.log(selectedDateTime, 'selectedDateTime')
+        // // Send formData to your API endpoint
         try {
             const res: any = await axios.post('/api/event/createEvent/', data)
             console.log(res)
@@ -76,15 +79,20 @@ const CreateEventComp = () => {
                         </select>
 
                     </div>
+                    {/* {selectedDateTime && (
+                        <p>
+                            Formatted Date: {format(new Date(selectedDateTime), 'MMMM d, yyyy HH:mm a')}
+                        </p>
+                    )} */}
                     <SpecialEvent inputs={inputs} handleInputChange={handleInputChange} />
-                    <AllEventKeys handleInputChange={handleInputChange} />
+                    <AllEventKeys handleInputChange={handleInputChange} setSelectedDateTime={setSelectedDateTime} selectedDateTime={selectedDateTime} />
 
                     {/* Add other input fields here */}
-                    {/* <button
+                    <button
                         className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
                     >
                         Create Event
-                    </button> */}
+                    </button>
                 </form>
             </div>
         </div>
@@ -109,9 +117,14 @@ const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleI
         </div>
     )
 }
+interface AllEventKeysProps {
+    handleInputChange: React.ChangeEventHandler;
+    setSelectedDateTime: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    selectedDateTime: any
+}
 
-const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEventHandler }) => {
-    const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+const AllEventKeys: React.FC<AllEventKeysProps> = ({ handleInputChange, setSelectedDateTime, selectedDateTime }) => {
+
 
     const handleDateTimeChange = (date: any) => {
         setSelectedDateTime(date);
@@ -121,7 +134,8 @@ const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEv
         <div>
             <div >
                 {/*  @ts-ignore */}
-                <Datetime value={new Date()} className=' appearance-none shadow border rounded py-3 text-gray-darker px-2' dateFormat="DD-MM-YYYY" />
+                <Datetime value={selectedDateTime} className=' appearance-none shadow border rounded py-3 text-gray-darker px-2' dateFormat="DD-MM-YYYY" onChange={handleDateTimeChange} />
+
             </div>
             {eventInput.map((event) => (
                 < div className="mb-4" key={event.name}>
