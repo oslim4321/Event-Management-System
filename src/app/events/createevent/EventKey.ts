@@ -31,10 +31,10 @@ export const eventInput = [
             name: 'eventName',
             title: 'Event Name'
         },
-        {
-            name: 'eventDate',
-            title: 'Date'
-        },
+        // {
+        //     name: 'eventDate',
+        //     title: 'Date'
+        // },
         {
             name: 'eventLocation',
             title: 'Event Location'

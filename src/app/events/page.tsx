@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link';
 import EventCard from '@/components/EventCard';
 import axios from 'axios';
+import EventList from './EventList';
 
 
 type UserSch = {
@@ -46,8 +47,9 @@ const page = async () => {
                 <div className='flex justify-end'>
                     <Link href='/events/createevent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
                 </div>
-                <EventCard eventData={data} />
+                {/* <EventCard eventData={data} /> */}
                 {/* My events */}
+                <EventList eventData={data} />
 
             </div>
 

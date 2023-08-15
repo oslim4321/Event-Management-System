@@ -3,6 +3,10 @@ import React, { ChangeEvent, useState } from 'react'
 import { SpecialEventKey, eventInput } from './EventKey';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Datetime from 'react-datetime';
+import "react-datetime/css/react-datetime.css";
+
+
 interface SpecialEvent {
     [eventName: string]: string[];
 }
@@ -76,11 +80,11 @@ const CreateEventComp = () => {
                     <AllEventKeys handleInputChange={handleInputChange} />
 
                     {/* Add other input fields here */}
-                    <button
+                    {/* <button
                         className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
                     >
                         Create Event
-                    </button>
+                    </button> */}
                 </form>
             </div>
         </div>
@@ -107,11 +111,21 @@ const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleI
 }
 
 const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEventHandler }) => {
+    const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+
+    const handleDateTimeChange = (date: any) => {
+        setSelectedDateTime(date);
+    };
 
     return (
         <div>
+            <div >
+                {/*  @ts-ignore */}
+                <Datetime value={new Date()} className=' appearance-none shadow border rounded py-3 text-gray-darker px-2' dateFormat="DD-MM-YYYY" />
+            </div>
             {eventInput.map((event) => (
                 < div className="mb-4" key={event.name}>
+
                     {
                         event.name === 'eventDesc' ?
                             <div>
@@ -128,6 +142,7 @@ const AllEventKeys = ({ handleInputChange }: { handleInputChange: React.ChangeEv
                 </div>
             ))
             }
+
 
         </div >
     )
