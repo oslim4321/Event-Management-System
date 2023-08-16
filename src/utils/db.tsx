@@ -6,7 +6,7 @@ const connect = async () => {
         await mongoose.connect(configValue);
         console.log('connected')
     } catch (error) {
-        throw Error("connection failed");
+        throw new Error("connection failed");
     }
 };
 export default connect;

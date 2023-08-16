@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
 import React from 'react'
+import Link from 'next/link'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
     // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
@@ -56,7 +57,8 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                         </div>
                                         <div className="flex items-center justify-between py-4">
                                             <h2 className="focus:outline-none text-indigo-700 text-xs font-semibold">{elem?.eventLocation}</h2>
-                                            <h3 className="focus:outline-none text-indigo-700 text-xl font-semibold"></h3>
+                                            {/* <h3 className="focus:outline-none text-indigo-700 text-xl font-semibold">View Event</h3> */}
+                                            <Link href={'/events/' + elem._id}><button className='border p-2'>view</button></Link>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +77,7 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
             <script>
                 if (!window.ShadyDOM) window.ShadyDOM = {force: true, noPatch: true };
             </script> */}
-        </div>
+        </div >
     )
 }
 

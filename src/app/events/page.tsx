@@ -1,4 +1,3 @@
-import { getServerSession } from 'next-auth'
 import React from 'react'
 import Link from 'next/link';
 import axios from 'axios';
@@ -24,6 +23,10 @@ const getData = async () => {
 
     }
 }
+export const metadata = {
+    title: "Event Lising",
+    description: "Stay up-to-date with the latest upcoming events and never miss out on exciting experiences. Explore a curated selection of upcoming events that cater to your interests and preferences. Don't let outdated information hold you back – discover the most relevant and engaging events waiting for you.",
+};
 const page = async () => {
 
     const { data } = await getData()
