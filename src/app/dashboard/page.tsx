@@ -2,11 +2,10 @@ import React from 'react'
 import axios from 'axios'
 import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
-import { serverUser } from '@/utils/typescriptModel'
 import LogoutButton from '@/components/LogoutButton'
 import ListMyEvent from './ListMyEvent'
 
-const getCurrentUser = async () => {
+const getData = async () => {
     try {
         const session: any = await getServerSession(handler)
         const email: string = session?.user?.email
@@ -14,7 +13,7 @@ const getCurrentUser = async () => {
         // console.log(data.message, 'mee')
         return data?.data?.message
     } catch (error) {
-        return error
+        throw Error('failed fetch data on')
     }
 }
 export const metadata = {
@@ -23,7 +22,7 @@ export const metadata = {
 };
 
 const page = async () => {
-    const data = await getCurrentUser()
+    const data = await getData()
     return (
         <div>
 
