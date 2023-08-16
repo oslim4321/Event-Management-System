@@ -72,7 +72,7 @@ const page = async () => {
                 </div>
             </div>
 
-            <ListMyEvent />
+            {/* <ListMyEvent /> */}
 
 
 
