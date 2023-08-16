@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth'
 import React from 'react'
 import Link from 'next/link';
-import EventCard from '@/components/EventCard';
 import axios from 'axios';
 import EventList from './EventList';
 
@@ -18,7 +17,7 @@ const getData = async () => {
         if (!res?.ok) {
             console.log('error ')
         }
-        return res.data
+        return res?.data
     } catch (error) {
         console.log(error, 'error')
         throw Error('failed fetch data on')

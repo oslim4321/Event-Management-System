@@ -2,11 +2,11 @@
 import { format } from 'date-fns'
 import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
-import React, { useState } from 'react'
+import React from 'react'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
-    const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
-    console.log(dd, 'dd')
+    // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
+    // console.log(dd, 'dd')
     return (
         <div>
             <div className="focus:outline-none">
@@ -20,7 +20,7 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                 <div>
                                     {/* <img alt="person capturing an image" src="https://cdn.tuk.dev/assets/templates/classNameified/Bitmap (1).png" className="focus:outline-none w-full h-44" /> */}
 
-                                    <ImgComp src={elem.image} alt={elem.eventName} className='w-full h-[200px] object-cover' />
+                                    <ImgComp src={elem.image} alt={elem?.eventName} className='w-full h-[200px] object-cover' />
                                 </div>
                                 <div className="bg-white">
                                     <div className="flex items-center justify-between px-4 pt-4">
@@ -31,31 +31,31 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                             </svg>
                                         </div>
                                         <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                                            <p className="focus:outline-none text-xs text-yellow-700">Featured</p>
+                                            <p className="focus:outline-none text-xs text-yellow-700"></p>
                                         </div>
                                     </div>
                                     <div className="p-4">
                                         <div className="flex items-center">
-                                            <h2 className="focus:outline-none text-lg font-semibold">{elem.eventName}</h2>
-                                            <p className="focus:outline-none text-xs text-gray-600 pl-5">{format(new Date(elem.eventDate), 'MMMM d, yyyy HH:mm a')}</p>
+                                            <h2 className="focus:outline-none text-lg font-semibold">{elem?.eventName}</h2>
+                                            <p className="focus:outline-none text-xs text-gray-600 pl-5">{format(new Date(elem?.eventDate), 'MMMM d, yyyy HH:mm a')}</p>
                                         </div>
-                                        <p className="focus:outline-none text-xs text-gray-600 mt-2">{elem.eventDesc}</p>
+                                        <p className="focus:outline-none text-xs text-gray-600 mt-2">{elem?.eventDesc}</p>
                                         <div className="flex mt-4">
                                             <div>
-                                                <p className="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1">{elem.eventType}</p>
+                                                <p className="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1">{elem?.eventType}</p>
                                             </div>
                                             <div className="pl-2">
                                                 {
-                                                    elem.performerNames.length > 0 &&
+                                                    elem?.performerNames.length > 0 &&
                                                     <p className="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1 w-full">
-                                                        <span >{elem.performerNames[0]}...</span>
+                                                        <span >{elem?.performerNames[0]}...</span>
 
                                                     </p>
                                                 }
                                             </div>
                                         </div>
                                         <div className="flex items-center justify-between py-4">
-                                            <h2 className="focus:outline-none text-indigo-700 text-xs font-semibold">{elem.eventLocation}</h2>
+                                            <h2 className="focus:outline-none text-indigo-700 text-xs font-semibold">{elem?.eventLocation}</h2>
                                             <h3 className="focus:outline-none text-indigo-700 text-xl font-semibold"></h3>
                                         </div>
                                     </div>
