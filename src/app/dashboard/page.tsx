@@ -8,11 +8,11 @@ import ListMyEvent from './ListMyEvent'
 
 const getCurrentUser = async () => {
     try {
-        const { user }: serverUser | any = await getServerSession(handler)
-        const email: string = user?.email
-        const { data }: any = await axios.post(process.env.BASE_URL + '/api/auth/getUser', { data: { email } })
+        const session: any = await getServerSession(handler)
+        const email: string = session?.user?.email
+        const data: any = await axios.post(process.env.BASE_URL + '/api/auth/getUser', { data: { email } })
         // console.log(data.message, 'mee')
-        return data.message
+        return data?.data?.message
     } catch (error) {
         return error
     }
@@ -45,14 +45,14 @@ const page = async () => {
                                 className="text-sm border bg-blue-50 font-bold uppercase border-2 rounded-l px-4 py-2 bg-gray-50 whitespace-no-wrap w-2/6">Name:</span>
                             <input
                                 className="px-4 border-l-0 cursor-default border-gray-300 focus:outline-none  rounded-md rounded-l-none shadow-sm -ml-1 w-4/6"
-                                type="text" value={data.firstName + ' ' + data.lastName} readOnly />
+                                type="text" value={data?.firstName + ' ' + data?.lastName} readOnly />
                         </div>
                         <div className="flex ">
                             <span
                                 className="text-sm border bg-blue-50 font-bold uppercase border-2 rounded-l px-4 py-2 bg-gray-50 whitespace-no-wrap w-2/6">Email:</span>
                             <input
                                 className="px-4 border-l-0 cursor-default border-gray-300 focus:outline-none  rounded-md rounded-l-none shadow-sm -ml-1 w-4/6"
-                                type="text" value={data.email} readOnly />
+                                type="text" value={data?.email} readOnly />
                         </div>
                         {/* <div className="flex ">
                             <span
@@ -72,7 +72,7 @@ const page = async () => {
                 </div>
             </div>
 
-            {/* <ListMyEvent /> */}
+            <ListMyEvent />
 
 
 
