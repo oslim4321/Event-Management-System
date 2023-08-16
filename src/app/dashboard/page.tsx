@@ -8,6 +8,10 @@ import ListMyEvent from './ListMyEvent'
 const getData = async () => {
     try {
         const session: any = await getServerSession(handler)
+        if (!session) {
+            throw Error('No session please login')
+
+        }
         const email: string = session?.user?.email
         const data: any = await axios.post(process.env.BASE_URL + '/api/auth/getUser', { data: { email } })
         // console.log(data.message, 'mee')
@@ -26,7 +30,7 @@ const page = async () => {
     return (
         <div>
 
-            <div className='max-w-[80%] mx-auto'>
+            {data._id && <div className='max-w-[80%] mx-auto'>
                 <div className="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
                     <div className="md:col-span-1 h-48 shadow-xl ">
                         <div className="flex w-full h-full relative">
@@ -69,7 +73,7 @@ const page = async () => {
                     </div>
 
                 </div>
-            </div>
+            </div>}
 
             <ListMyEvent />
 
