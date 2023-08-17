@@ -10,7 +10,7 @@ const getData = async () => {
     try {
         const session: any = await getServerSession(handler)
         if (!session) {
-            throw Error('No session please login')
+            throw new Error('No session please login')
 
         }
         const email: string = session?.user?.email
@@ -18,7 +18,7 @@ const getData = async () => {
         // console.log(data.message, 'mee')
         return data?.data?.message
     } catch (error) {
-        throw Error('failed fetch data on')
+        throw new Error('failed fetch data on')
     }
 }
 export const metadata = {

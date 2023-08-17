@@ -33,10 +33,10 @@ export const Option = () => {
                         status === 'authenticated' ?
                             <p>Hello {data?.newUser?.firstName}</p>
                             :
-                            status === 'loading' ? 'wait...' :
-                                <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                    Login
-                                </button>
+                            // status === 'loading' ? 'wait...' :
+                            <button type="button" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                                Login
+                            </button>
                     }
                 </div>
                 {/* <ShowUserStateAuth /> */}
