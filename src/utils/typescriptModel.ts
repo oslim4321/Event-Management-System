@@ -28,6 +28,10 @@ export type EventTypeModel = {
   performerNames: string[]; // List of performer names for 'Musical' events
   createdAt: string;
   updatedAt: string;
+  eventDesc: string;
+  firstName?: string;
+  lastName?: string;
+  userID?: string
   __v: number;
 };
 export type serverUser = {

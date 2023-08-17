@@ -1,6 +1,8 @@
+"use client"
 import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
 import React from 'react'
+import { format } from 'date-fns'
 
 const FullEvent = ({ data }: { data: EventTypeModel }) => {
     return (
@@ -21,9 +23,9 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
                         {/* <!--post categories--> */}
                         <div className="flex items-center justify-start mt-4 mb-4">
-                            <a href="#" className="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500 mr-4">Django</a>
-                            <a href="#" className="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500 mr-4">Python</a>
-                            <a href="#" className="px-2 py-1 font-bold bg-red-400 text-white rounded-lg hover:bg-gray-500">web development</a>
+                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{format(new Date(data?.eventDate), 'MMMM d, yyyy HH:mm a')}</a>
+                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">Python</a>
+                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500">web development</a>
                         </div>
                         <div className="mt-2">
                             {/* <!--post heading--> */}
@@ -41,7 +43,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                                 <a href="#" className="flex items-center mt-6 mb-6"><img
                                     src="https://avatars.githubusercontent.com/u/71964085?v=4"
                                     alt="avatar" className="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block" />
-                                    <h1 className="font-bold text-gray-700 hover:underline">By James Amos</h1>
+                                    <h1 className="font-bold text-gray-700 hover:underline">Posted By {data.lastName} {data.firstName}</h1>
                                 </a>
                             </div>
                         </div>
@@ -52,7 +54,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
                             {/* <!--content body--> */}
                             <div>
-                                <p className="mt-2 p-8">If you created a web application and wanted it to grow a user base reall quickly,the easiest way is to avoid bothering them with alot forms. No one likes filling up forms! A web form should and must only be used when necessary,in case a user doesnt have account with any of the social networks.That is the moment you want to implement social login on your application.</p>
+                                <p className="mt-2 p-8">{data?.eventDesc}</p>
                             </div>
 
 
@@ -117,7 +119,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                             <form className="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
                                 <h3 className="mb-6 text-2xl font-medium text-center">Write a comment</h3>
                                 {/* <textarea type="text" name="comment" className="w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" placeholder="Write your comment" ></textarea> */}
-                                <textarea className="w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none border" cols={Number(30)} rows={Number(10)}></textarea>
+                                <textarea className="w-full px-4 py-3 mb-4 border border-2  border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none hover:border-tranparent" cols={Number(30)} rows={Number(10)}></textarea>
                                 <input type="submit" value="Submit comment" name="submit" className=" text-white px-4 py-3 bg-blue-500  rounded-lg" />
                             </form>
                         </div>

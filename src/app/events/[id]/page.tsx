@@ -14,7 +14,7 @@ async function getData(id: string) {
         return event.data.message
 
     } catch (error) {
-        throw Error("failed to fetch data");
+        throw new Error("failed to fetch data");
 
         // return error
         // throw Error('failed fetch data on')

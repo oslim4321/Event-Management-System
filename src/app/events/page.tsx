@@ -31,7 +31,6 @@ const page = async () => {
 
     const { data } = await getData()
 
-
     // const session: any = await getServerSession(handler)
 
     // if (!session) {
