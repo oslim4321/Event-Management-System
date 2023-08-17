@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
 import LogoutButton from '@/components/LogoutButton'
 import ListMyEvent from './ListMyEvent'
+import ProfileAvatar from '@/components/ProfileAvatar'
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
@@ -38,8 +39,8 @@ const page = async () => {
                     <div className="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
                         <div className="md:col-span-1 h-48 shadow-xl ">
                             <div className="flex w-full h-full relative">
-                                <img src="https://res.cloudinary.com/dboafhu31/image/upload/v1625318266/imagen_2021-07-03_091743_vtbkf8.png" loading='lazy' className="w-44 h-44 m-auto" alt="" />
-
+                                {/* <img src="https://res.cloudinary.com/dboafhu31/image/upload/v1625318266/imagen_2021-07-03_091743_vtbkf8.png" loading='lazy' className="w-44 h-44 m-auto" alt="" /> */}
+                                <ProfileAvatar />
                             </div>
                         </div>
                         <div className="relative md:col-span-3 h-48 shadow-xl p-4 space-y-2 p-3">

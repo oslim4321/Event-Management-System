@@ -3,6 +3,7 @@ import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
 import React from 'react'
 import { format } from 'date-fns'
+import ProfileAvatar from '@/components/ProfileAvatar'
 
 const FullEvent = ({ data }: { data: EventTypeModel }) => {
     return (
@@ -12,8 +13,11 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
                     {/* <!--author--> */}
                     <div className="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
-                        <a href="#"
-                            className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-purple-500  hover:underline">{data.eventName}</a>
+                        <div className="flex justify-between">
+                            <p
+                                className="sm:text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-blue-500">{data.eventName}</p>
+                            <p className="md:text-1xl lg:text-3xl xl:text-3xl font-bold text-blue-300">{data.guestCount} attendee{data.guestCount !== 1 ? 's' : ''}</p>
+                        </div>
 
 
                         <a href="#_" className="block transition duration-200 ease-out transform hovder:scale-110">
@@ -22,10 +26,10 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                         </a>
 
                         {/* <!--post categories--> */}
-                        <div className="flex items-center justify-start mt-4 mb-4">
+                        <div className="flex items-center justify-start flex-wrap mt-4 mb-4">
                             <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{format(new Date(data?.eventDate), 'MMMM d, yyyy HH:mm a')}</a>
-                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">Python</a>
-                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500">web development</a>
+                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{data.eventLocation}</a>
+                            {/* <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500">web development</a> */}
                         </div>
                         <div className="mt-2">
                             {/* <!--post heading--> */}
@@ -40,11 +44,10 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                             {/* <!--author avator--> */}
                             <div className="font-light text-gray-600">
 
-                                <a href="#" className="flex items-center mt-6 mb-6"><img
-                                    src="https://avatars.githubusercontent.com/u/71964085?v=4"
-                                    alt="avatar" className="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block" />
+                                <div className="flex items-center mt-6 mb-6">
+                                    <ProfileAvatar />
                                     <h1 className="font-bold text-gray-700 hover:underline">Posted By {data.lastName} {data.firstName}</h1>
-                                </a>
+                                </div>
                             </div>
                         </div>
 
@@ -59,6 +62,24 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
 
 
+                        </div>
+                    </div>
+                    <div className="max-w-4xl px-10 mx-auto text-gray-700 mt-4 rounded bg-gray-100">
+                        <div className="mt-2 p-8">
+                            <p>Event Location: {data.eventLocation}</p>
+                            <p>Attire: {data.attire}</p>
+                            <p>Guest Count: {data.guestCount}</p>
+                            <p>Special Instructions: {data.specialInstructions}</p>
+                            {data.eventType === 'Birthday' && (
+                                <p>Age: {data.age}</p>
+                            )}
+                            {/* {data.eventType === 'Musical' && ( */}
+                            <div>
+                                <p>Musician Names: {data.musicianNames}</p>
+                                <p>Music Genre: {data.musicGenre}</p>
+                                <p>Performer Names: {data.performerNames.join(', ')}</p>
+                            </div>
+                            {/* )} */}
                         </div>
                     </div>
 
@@ -162,7 +183,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

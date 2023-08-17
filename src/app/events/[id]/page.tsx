@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: MyObjectType }) {
 const page = async ({ params }: { params: MyObjectType }) => {
     const data = await getData(params.id)
     return (
-        <div>page
+        <div>
             {
                 data._id ?
                     <FullEvent data={data} />
