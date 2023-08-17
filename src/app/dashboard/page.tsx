@@ -3,14 +3,13 @@ import axios from 'axios'
 import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
 import LogoutButton from '@/components/LogoutButton'
-import ListMyEvent from './ListMyEvent'
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
     try {
         const session: any = await getServerSession(handler)
         if (!session) {
-            throw new Error('No session please login')
+            throw Error('No session please login')
 
         }
         const email: string = session?.user?.email
@@ -18,7 +17,7 @@ const getData = async () => {
         // console.log(data.message, 'mee')
         return data?.data?.message
     } catch (error) {
-        throw new Error('failed fetch data on')
+        throw Error('failed fetch data on')
     }
 }
 export const metadata = {
@@ -27,12 +26,11 @@ export const metadata = {
 };
 
 const page = async () => {
-    // const data = await getData()
+    const data = await getData()
     return (
         <div>
 
-            {/* {data._id && */}
-            <div className='max-w-[80%] mx-auto'>
+            {data._id && <div className='max-w-[80%] mx-auto'>
                 <div className="md:grid grid-cols-4 grid-rows-2  bg-white gap-2 p-4 rounded-xl">
                     <div className="md:col-span-1 h-48 shadow-xl ">
                         <div className="flex w-full h-full relative">
@@ -48,16 +46,16 @@ const page = async () => {
                         <div className="flex ">
                             <span
                                 className="text-sm border bg-blue-50 font-bold uppercase border-2 rounded-l px-4 py-2 bg-gray-50 whitespace-no-wrap w-2/6">Name:</span>
-                            {/* <input
+                            <input
                                 className="px-4 border-l-0 cursor-default border-gray-300 focus:outline-none  rounded-md rounded-l-none shadow-sm -ml-1 w-4/6"
-                                type="text" value={data?.firstName + ' ' + data?.lastName} readOnly /> */}
+                                type="text" value={data?.firstName + ' ' + data?.lastName} readOnly />
                         </div>
                         <div className="flex ">
                             <span
                                 className="text-sm border bg-blue-50 font-bold uppercase border-2 rounded-l px-4 py-2 bg-gray-50 whitespace-no-wrap w-2/6">Email:</span>
-                            {/* <input
+                            <input
                                 className="px-4 border-l-0 cursor-default border-gray-300 focus:outline-none  rounded-md rounded-l-none shadow-sm -ml-1 w-4/6"
-                                type="text" value={data?.email} readOnly /> */}
+                                type="text" value={data?.email} readOnly />
                         </div>
                         {/* <div className="flex ">
                             <span
@@ -75,10 +73,9 @@ const page = async () => {
                     </div>
 
                 </div>
-            </div>
-            {/* } */}
+            </div>}
 
-            <ListMyEvent />
+            {/* <ListMyEvent /> */}
 
 
 
@@ -87,4 +84,3 @@ const page = async () => {
 }
 
 export default page
-
