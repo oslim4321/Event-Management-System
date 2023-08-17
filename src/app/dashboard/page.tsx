@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getServerSession } from "next-auth"
 import { handler } from '../api/auth/[...nextauth]/route'
 import LogoutButton from '@/components/LogoutButton'
-// import ListMyEvent from './ListMyEvent'
+import ListMyEvent from './ListMyEvent'
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
@@ -76,7 +76,7 @@ const page = async () => {
                 </div>
             </div>}
 
-            {/* <ListMyEvent /> */}
+            <ListMyEvent />
 
 
 

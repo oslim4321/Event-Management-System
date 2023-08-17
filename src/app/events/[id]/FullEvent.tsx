@@ -16,7 +16,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
                         <a href="#_" className="block transition duration-200 ease-out transform hovder:scale-110">
                             {/* <img className="object-cover w-full shadow-sm h-full" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80" /> */}
-                            <ImgComp src={data.image} alt={data.eventName} className="object-cover w-full shadow-sm h-full" />
+                            <ImgComp src={data.image} alt={data.eventName} className="object-cover w-full h-[600px] shadow-sm" />
                         </a>
 
                         {/* <!--post categories--> */}
