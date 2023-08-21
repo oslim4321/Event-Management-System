@@ -11,7 +11,7 @@ export type UserTypeModel = {
   __v: number;
 };
 export type EventTypeModel = {
-  _id: string;
+  _id?: string;
   image: string;
   eventType: 'Birthday' | 'Wedding' | 'Burial' | 'Other';
   eventName: string;
@@ -32,7 +32,7 @@ export type EventTypeModel = {
   firstName?: string;
   lastName?: string;
   userID?: string
-  __v: number;
+  __v?: number;
 };
 export type serverUser = {
   name?: string,

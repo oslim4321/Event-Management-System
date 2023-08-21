@@ -2,7 +2,7 @@ export const eventInput = [
     {
         name: 'eventType',
         title: 'Event Type',
-        type: 'text', // Input type
+        type: 'category', // Input type
     },
 
     {
@@ -51,3 +51,24 @@ export const eventInput = [
         type: 'text', // Input type
     },
 ];
+
+export const SpecialEventKey = [
+    {
+        Wedding: [
+            'musicianNames',
+        ],
+        Birthday: [
+            'celebrantName',
+            'age'
+        ],
+        Burial: [
+            'tributeDetails',
+            'musicianNames'
+        ],
+        Musical: [
+            'musicianNames',
+            'musicGenre',
+            'ticketPrice'
+        ]
+    }
+]
