@@ -4,7 +4,7 @@ import { EventTypeModel } from '@/utils/typescriptModel'
 import React from 'react'
 import { format } from 'date-fns'
 import ProfileAvatar from '@/components/ProfileAvatar'
-// import RelatedEvents from './RelatedEvents'
+import RelatedEvents from './RelatedEvents'
 
 const FullEvent = ({ data }: { data: EventTypeModel }) => {
     console.log(data)
@@ -88,7 +88,7 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
                     {/* <!--related posts--> */}
                     <h2 className="text-2xl mt-4 text-gray-500 font-bold text-center">Related Posts</h2>
 
-                    {/* <RelatedEvents category={data?.eventType} /> */}
+                    <RelatedEvents category={data?.eventType} />
 
                     {/* <!--form form comments--> */}
 
