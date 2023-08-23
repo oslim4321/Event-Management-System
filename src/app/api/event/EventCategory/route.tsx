@@ -1,5 +1,4 @@
 import Event from "@/model/Event";
-import axios from "axios"
 import { NextResponse } from "next/server";
 
 
