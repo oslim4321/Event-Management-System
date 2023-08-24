@@ -11,7 +11,7 @@ async function getData(id: string) {
         if (!event?.ok) {
             console.log('error ')
         }
-        return event.data.message
+        return event.data
 
     } catch (error) {
         throw Error("failed to fetch data");
@@ -31,12 +31,12 @@ export async function generateMetadata({ params }: { params: MyObjectType }) {
 }
 
 const page = async ({ params }: { params: MyObjectType }) => {
-    const data = await getData(params.id)
+    const { message: data, comment } = await getData(params.id)
     return (
         <div>
             {
                 data._id ?
-                    <FullEvent data={data} />
+                    <FullEvent data={data} comment={comment} />
                     :
                     'Error'
 

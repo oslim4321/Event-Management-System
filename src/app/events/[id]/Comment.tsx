@@ -6,7 +6,9 @@ import React, { useState } from 'react'
 const Comment = ({ event }: { event: string | undefined }) => {
     const { data }: { data: any } = useSession()
     const [text, settext] = useState('')
+    const [loading, setloading] = useState(false)
     async function postComment() {
+        setloading(true)
         console.log(data)
         const userName = `${data?.newUser.lastName} ${data?.newUser.firstName}`;
         const comment = { text, event, user: data?.newUser?._id, userName }
@@ -17,6 +19,8 @@ const Comment = ({ event }: { event: string | undefined }) => {
             }
         } catch (error) {
             console.log(error)
+        } finally {
+            setloading(false)
         }
 
     }
@@ -30,7 +34,7 @@ const Comment = ({ event }: { event: string | undefined }) => {
                         {/* <textarea type="text" name="comment" className="w-full px-4 py-3 mb-4 border border-2 border-transparent border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none" placeholder="Write your comment" ></textarea> */}
                         <textarea onChange={(e) => settext(e.target.value)} className="w-full px-4 py-3 mb-4 border border-2  border-gray-200 rounded-lg focus:ring focus:ring-blue-500 focus:outline-none hover:border-tranparent" cols={Number(30)} rows={Number(10)}></textarea>
                         {/* <input type="submit" value="Submit comment" name="submit" className=" text-white px-4 py-3 bg-blue-500  rounded-lg" /> */}
-                        {data ? <button onClick={postComment} className=" text-white px-4 py-3 bg-blue-500  rounded-lg" >Commment</button> :
+                        {data ? <button disabled={loading} onClick={postComment} className=" text-white px-4 py-3 bg-blue-500  rounded-lg" >{loading ? 'Posting' : 'Commment'}</button> :
                             <button>Sign in to Comment</button>
                         }
                     </div>

@@ -8,8 +8,8 @@ import RelatedEvents from './RelatedEvents'
 import Comment from './Comment'
 import ReadComments from './ReadComments'
 
-const FullEvent = ({ data }: { data: EventTypeModel }) => {
-    console.log(data, 'yesh me')
+const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }) => {
+    console.log(comment, 'yesh me')
     return (
         <div>
             <div className="mt-6 bg-gray-50">
@@ -98,7 +98,8 @@ const FullEvent = ({ data }: { data: EventTypeModel }) => {
 
 
                     {/* <!--comments--> */}
-                    <ReadComments />
+                    {/*  @ts-ignore */}
+                    {comment ? <ReadComments comment={comment} /> : ''}
                 </div>
             </div>
         </div >

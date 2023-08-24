@@ -39,3 +39,15 @@ export type serverUser = {
   email?: string,
   image?: string
 }
+
+
+export type Comment = {
+  _id: string;
+  text: string;
+  user: string;
+  userName: string;
+  event: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
