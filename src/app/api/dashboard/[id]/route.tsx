@@ -7,7 +7,7 @@ export const GET = async (request: Request, { params }: any) => {
     const { id } = params;
     console.log('req came in')
     try {
-        connect()
+        await connect()
         console.log(id, 'event id')
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return NextResponse.json({ message: 'Invalid id' }, { status: 400 });
