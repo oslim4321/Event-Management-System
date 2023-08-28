@@ -66,7 +66,7 @@ export const GET = async (request: Request, { params }: any) => {
 
         const results = { ...singleEvent.toObject(), ...user }
 
-        return NextResponse.json({ message: results, comment: comment })
+        return NextResponse.json({ message: results, comment })
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 })
     }

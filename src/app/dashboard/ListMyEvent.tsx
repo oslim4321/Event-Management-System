@@ -1,14 +1,22 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Spinner from '@/components/Spinner'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { EventTypeModel } from '@/utils/typescriptModel'
+import { format } from 'date-fns'
+import Link from 'next/link'
 
 const ListMyEvent = () => {
     const [loading, setloading] = useState(false)
     const [data, setdata] = useState([]);
     const session = useSession()
+    if (!session) {
+        alert('no session')
+    } else {
+        console.log(session);
+
+    }
     async function handleFetchData() {
         setloading(true)
         try {                                                 //@ts-ignore
@@ -22,10 +30,13 @@ const ListMyEvent = () => {
         }
     }
     console.log(data)
+    useEffect(() => {
+        handleFetchData()
+    }, [session])
 
     return (
         <>
-            <button onClick={handleFetchData}>See my Events</button>
+            {/* <button onClick={handleFetchData}>See my Events</button> */}
             <Spinner loading={loading} />
             {!loading && data.length > 1 ? <div className="flex flex-col">
                 <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
@@ -49,6 +60,9 @@ const ListMyEvent = () => {
                                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                             Date
                                         </th>
+                                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            Edit
+                                        </th>
                                     </tr>
                                 </thead>
                                 {data.map((elem: EventTypeModel, i) => (
@@ -65,8 +79,13 @@ const ListMyEvent = () => {
                                                 {elem?.eventType}
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                {elem?.eventDate}
+                                                {format(new Date(elem?.eventDate), 'MMMM d, yyyy HH:mm a')}
                                             </td>
+                                            <Link href={`events/editEvent/${elem._id}`}>
+                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border cursor-pointer">
+                                                    edit
+                                                </td>
+                                            </Link>
                                         </tr>
 
                                     </tbody>

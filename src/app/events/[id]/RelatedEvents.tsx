@@ -3,6 +3,7 @@ import { ImgComp } from '@/components/ImageComp';
 import Spinner from '@/components/Spinner';
 import { EventTypeModel } from '@/utils/typescriptModel';
 import axios from 'axios';
+import { format } from 'date-fns';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
@@ -43,7 +44,7 @@ const RelatedEvents = ({ category }: { category: string | null }) => {
                                         </Link>
                                         <div className="relative flex flex-col items-start px-6 bg-white border border-t-0 border-gray-200 py-7 rounded-b-2xl">
                                             <div className="bg-indigo-400 absolute top-0 -mt-3 flex items-center px-3 py-1.5 leading-none w-auto inline-block rounded-full text-xs font-medium uppercase text-white inline-block">
-                                                <span>Flask</span>
+                                                <span>{format(new Date(elem.createdAt), 'MMMM d,')}</span>
                                             </div>
                                             <h2 className="text-base text-gray-500 font-bold sm:text-lg md:text-xl"><a href="#_">{elem.eventName}</a></h2>
                                             {elem?.eventDesc && <p className="mt-2 text-sm text-gray-500">{elem?.eventDesc.slice(0, 100) || ''}</p>}

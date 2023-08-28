@@ -10,6 +10,9 @@ import ReadComments from './ReadComments'
 
 const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }) => {
     console.log(comment, 'yesh me')
+    const currentDate = new Date();
+    const eventDa = new Date(data?.eventDate)
+
     return (
         <div>
             <div className="mt-6 bg-gray-50">
@@ -31,7 +34,8 @@ const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }
 
                         {/* <!--post categories--> */}
                         <div className="flex items-center justify-start flex-wrap mt-4 mb-4">
-                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{format(new Date(data?.eventDate), 'MMMM d, yyyy HH:mm a')}</a>
+                            {/* <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{format(new Date(data?.eventDate), 'MMMM d, yyyy HH:mm a')}</a> */}
+                            <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{format(new Date(data?.eventDate), 'MMMM d')}</a>
                             <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500 mr-4">{data.eventLocation}</a>
                             {/* <a href="#" className="px-2 py-1 font-bold bg-blue-400 text-white rounded-lg hover:bg-gray-500">web development</a> */}
                         </div>
@@ -42,6 +46,8 @@ const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }
                             <div className="flex justify-start items-center mt-2">
                                 <p className="text-sm text-green-500 font-bold bg-gray-100 rounded-full py-2 px-2 hover:text-red-500">3000</p>
                                 <p className="text-sm text-gray-400 font-bold ml-5">Views</p>
+                                {currentDate <= eventDa ? <p className="text-sm text-red-400 font-bold ml-5">Sorry, this event has already taken place.</p> :
+                                    <button className="text-sm text-gray-400 font-bold ml-5 border buttonx-2 py-1 ">Register</button>}
 
                             </div>
 
@@ -82,6 +88,8 @@ const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }
                                 <p>Musician Names: {data.musicianNames}</p>
                                 <p>Music Genre: {data.musicGenre}</p>
                                 <p>Performer Names: {data.performerNames.join(', ')}</p>
+                                <p>Time: {format(new Date(data.eventDate), 'HH:mm a')}</p>
+                                <p>Event Year: {format(new Date(data.eventDate), 'yyyy')}</p>
                             </div>
                             {/* )} */}
                         </div>

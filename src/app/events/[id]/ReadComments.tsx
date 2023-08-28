@@ -1,3 +1,4 @@
+import ProfileAvatar from '@/components/ProfileAvatar'
 import { Comment } from '@/utils/typescriptModel'
 import { format } from 'date-fns'
 import React from 'react'
@@ -12,16 +13,19 @@ const ReadComments = ({ comment }: { comment: Comment[] }) => {
             </p>
             {/* <!--comment 1--> */}
             {comment?.length > 0 ?
-                comment.map((elem) => (
+                comment.map((elem, i) => (
 
-                    <div className="flex  items-center w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
+                    <div key={i} className="flex  items-center w-full px-6 py-6 mx-auto mt-10 bg-white border border-gray-200 rounded-lg sm:px-8 md:px-12 sm:py-8 sm:shadow lg:w-5/6 xl:w-2/3">
 
-                        <a href="#" className="flex items-center mt-6 mb-6 mr-6"><img src="https://avatars.githubusercontent.com/u/71964085?v=4" alt="avatar" className="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block" />
-                        </a>
+                        {/* <a href="#" className="flex items-center mt-6 mb-6 mr-6"><img src="https://avatars.githubusercontent.com/u/71964085?v=4" alt="avatar" className="hidden object-cover w-14 h-14 mx-4 rounded-full sm:block" /> */}
+                        <div>
+                            <ProfileAvatar />
+                        </div>
+                        {/* </a> */}
 
                         <div><h3 className="text-lg font-bold text-purple-500 sm:text-xl md:text-2xl">By {elem.userName}</h3>
                             {/* <p className="text-sm font-bold text-gray-300">{format(new Date())}</p> */}
-                            {/* <p className="text-sm font-bold text-gray-300">{format(new Date(elem?.createdAt))}</p> */}
+                            <p className="text-sm font-bold text-gray-300">{format(new Date(elem?.createdAt), 'MMMM d, yyyy HH:mm a')}</p>
                             <p className="mt-2 text-base text-gray-600 sm:text-lg md:text-normal">
                                 {elem.text}</p>
                         </div>
@@ -44,7 +48,7 @@ const ReadComments = ({ comment }: { comment: Comment[] }) => {
                 </div>
             </div> */}
 
-        </div>
+        </div >
     )
 }
 

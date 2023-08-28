@@ -12,7 +12,7 @@ interface SpecialEvent {
     [eventName: string]: string[];
 }
 
-const CreateEventComp = () => {
+const UpdateEvent = () => {
     const [inputs, setinputs] = useState<any>();
     const [data, setdata] = useState<any>()
     const router = useRouter()
@@ -100,7 +100,7 @@ const CreateEventComp = () => {
 };
 
 
-export default CreateEventComp
+export default UpdateEvent
 
 const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleInputChange: React.ChangeEventHandler<HTMLInputElement> }) => {
     return (

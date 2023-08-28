@@ -6,6 +6,8 @@ import React from 'react'
 import Link from 'next/link'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
+    const currentDate = new Date();
+    // const eventDa = new Date(data?.eventDate)
     // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
     // console.log(dd, 'dd')
     return (
@@ -17,7 +19,7 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                         {/* <!-- Card 1 --> */}
                         {/* @ts-ignore */}
                         {eventData?.map((elem): any => (
-                            < div key={elem._id} className="focus:outline-none mx-2 w-72 xl:mb-0 mb-8 border">
+                            < div key={elem._id} className="focus:outline-none mx-2 w-72 xl:mb-0 mb-8 border relative">
                                 <div>
                                     {/* <img alt="person capturing an image" src="https://cdn.tuk.dev/assets/templates/classNameified/Bitmap (1).png" className="focus:outline-none w-full h-44" /> */}
 
@@ -38,14 +40,14 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                     <div className="p-4">
                                         <div className="flex items-center">
                                             <h2 className="focus:outline-none text-lg font-semibold">{elem?.eventName}</h2>
-                                            <p className="focus:outline-none text-xs text-gray-600 pl-5">{format(new Date(elem?.eventDate), 'MMMM d, yyyy HH:mm a')}</p>
+                                            <p className="focus:outline-none text-xs text-gray-600 pl-5">{format(new Date(elem?.eventDate), 'MMMM d')}</p>
                                         </div>
                                         <p className="focus:outline-none text-xs text-gray-600 mt-2">{elem?.eventDesc}</p>
                                         <div className="flex mt-4">
                                             <div>
                                                 <p className="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1">{elem?.eventType}</p>
                                             </div>
-                                            <div className="pl-2">
+                                            <div className="pl-2 flex justify-between">
                                                 {
                                                     elem?.performerNames.length > 0 &&
                                                     <p className="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1 w-full">
@@ -53,6 +55,10 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
 
                                                     </p>
                                                 }
+                                                <div className='absolute right-5'>
+
+                                                    {currentDate <= new Date(elem.eventDate) ? <p className='text-red-400'>OFF</p> : <p >ON</p>}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="flex items-center justify-between py-4">
