@@ -6,13 +6,16 @@ import { useRouter } from 'next/navigation';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { format, parseISO } from 'date-fns'
+import { EventTypeModel } from '@/utils/typescriptModel';
 
 
 interface SpecialEvent {
     [eventName: string]: string[];
 }
 
-const UpdateEvent = () => {
+const UpdateEvent = ({EventData} : {EventData: EventTypeModel}) => {
+    console.log(EventData, 'EventData');
+    
     const [inputs, setinputs] = useState<any>();
     const [data, setdata] = useState<any>()
     const router = useRouter()

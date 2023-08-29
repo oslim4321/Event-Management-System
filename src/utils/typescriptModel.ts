@@ -33,6 +33,7 @@ export type EventTypeModel = {
   lastName?: string;
   userID?: string
   __v?: number;
+  
 };
 export type serverUser = {
   name?: string,

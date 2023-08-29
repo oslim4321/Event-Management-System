@@ -5,7 +5,7 @@ interface MyObjectType {
     id: string;
 }
 
-async function getData(id: string) {
+export async function getSingleEvent(id: string) {
     try {
         const event: any = await axios.get(process.env.BASE_URL + '/api/event/' + id)
         if (!event?.ok) {
@@ -22,7 +22,7 @@ async function getData(id: string) {
 }
 
 export async function generateMetadata({ params }: { params: MyObjectType }) {
-    const data = await getData(params.id)
+    const data = await getSingleEvent(params.id)
 
     return {
         title: data?.eventName || 'Event Manager',
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: MyObjectType }) {
 }
 
 const page = async ({ params }: { params: MyObjectType }) => {
-    const { message: data, comment } = await getData(params.id)
+    const { message: data, comment } = await getSingleEvent(params.id)
     return (
         <div>
             {
