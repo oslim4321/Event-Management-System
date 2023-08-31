@@ -81,11 +81,11 @@ const ListMyEvent = () => {
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {format(new Date(elem?.eventDate), 'MMMM d, yyyy HH:mm a')}
                                             </td>
-                                            <Link href={`events/editEvent/${elem._id}`}>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border cursor-pointer">
+                                            <Link href={`events/editEvent/${elem._id}`}>
                                                     edit
-                                                </td>
                                             </Link>
+                                                </td>
                                         </tr>
 
                                     </tbody>

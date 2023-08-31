@@ -57,7 +57,7 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                                 }
                                                 <div className='absolute right-5'>
 
-                                                    {currentDate <= new Date(elem.eventDate) ? <p className='text-red-400'>OFF</p> : <p >ON</p>}
+                                                    {currentDate > new Date(elem.eventDate) ? <p className='text-red-400'>OFF</p> : <p >ON</p>}
                                                 </div>
                                             </div>
                                         </div>
