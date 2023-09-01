@@ -1,13 +1,29 @@
-import React from 'react'
 
+import React, {useState} from 'react'
+import axios from 'axios'
 type props = {
     seteventDelId: any,
     eventDelId: string | undefined
 }
 const DeleteEventComp = ({seteventDelId, eventDelId}: props )  => {
 
-    const deleteEvent = ()=>{
-        console.log('delete the event');
+    const [loading, setloading] = useState(false)
+    const deleteEvent = async()=>{
+        setloading(true)
+       try {
+         const res = await axios.delete('/api/event/' + eventDelId)
+         console.log(res, 'delete event');
+         if(res){
+            seteventDelId('')
+         }
+         
+       } catch (error) {
+        console.log(error);
+        
+       }finally{
+        seteventDelId('')
+        setloading(false)
+       }
         
     }
   return (
@@ -34,7 +50,14 @@ const DeleteEventComp = ({seteventDelId, eventDelId}: props )  => {
                 <button onClick={()=> seteventDelId('')} className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
                     Cancel
                 </button>
+                {
+                    loading
+                    ?
+                    <button className="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Deleting...</button>
+                    :
+
                 <button onClick={deleteEvent} className="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Delete</button>
+                }
             </div>
           </div>
         </div>
