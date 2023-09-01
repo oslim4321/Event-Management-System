@@ -6,6 +6,7 @@ import "react-datetime/css/react-datetime.css";
 import { format } from 'date-fns'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 
 interface SpecialEventType {
@@ -16,6 +17,7 @@ interface FormData {
 }
 
 const EventForm = () => {
+    const {data} : any = useSession()
     const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState<any>();
     const [selectedDateTime, setSelectedDateTime] = useState<Date | undefined>(undefined);
@@ -25,9 +27,9 @@ const EventForm = () => {
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
-        setFormData((prevData: any) => ({ ...prevData, [name]: value, eventDate: selectedDateTime }));
+        setFormData((prevData: any) => ({ ...prevData, [name]: value, eventDate: selectedDateTime, organizer: data?.newUser?._id }));
 
-        SpecialEventKey.forEach((elem: any) => {
+        SpecialEventKey?.forEach((elem: any) => {
 
             if (elem[value]) {
                 setinputs(elem[value])
@@ -50,6 +52,8 @@ const EventForm = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+       
+        
         // post data
         try {
             const res: any = await axios.post('/api/event/createEvent/', formData)

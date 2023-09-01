@@ -10,6 +10,7 @@ import { useTypedSelector } from '@/GlobalRedux/store';
 import {useDispatch} from 'react-redux'
 import { saveSingleEvent } from '@/GlobalRedux/Features/SingleEvent/singleEvent';
 import { SpecialEventKey, eventInput } from '../../uploadEvent/EventKey';
+import { useSession } from 'next-auth/react';
 
 interface SpecialEvent {
     [eventName: string]: string[];
@@ -17,6 +18,8 @@ interface SpecialEvent {
 
 const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: string}) => {
     const [isupdating, setisupdating] = useState(false)
+    const session: any = useSession()
+
     const dispatch = useDispatch()
     dispatch(saveSingleEvent(EventData))
     
@@ -47,7 +50,7 @@ const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: s
         const eventType  = target.eventType.value
         const eventDate  = target.eventDate.value
         const eventLocation  = target.eventLocation.value
-        const organizer  = target.organizer.value
+        const organizer  = session.data.newUser._id
         const attire  = target.attire.value
         const guestCount  = target.guestCount.value
         const specialInstructions  = target.specialInstructions.value

@@ -20,11 +20,11 @@ export const eventInput = [
         title: 'Event Location',
         type: 'text',
     },
-    {
-        name: 'organizer',
-        title: 'Event Organizer',
-        type: 'text',
-    },
+    // {
+    //     name: 'organizer',
+    //     title: 'Event Organizer',
+    //     type: 'text',
+    // },
     {
         name: 'attire',
         title: 'Attire',
