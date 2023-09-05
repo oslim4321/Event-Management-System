@@ -15,7 +15,7 @@ const Header = () => {
                         EventManager
                     </span>
                 </Link>
-                <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+                <ul className="flex flex-col md:flex-row items-center w-1/2 justify-around space-y-2 md:space-y-0 md:space-x-4">
                     <li>
                         <Link href="/">
                             <span className="text-white hover:text-blue-300">Home</span>
@@ -54,7 +54,7 @@ const User = async () => {
         <div>
             {
                 session ?
-                    <Link href='dashboard'><span className="text-white hover:text-blue-300"> {session?.user.name || session?.user?.email}</span></Link>
+                    <Link href='dashboard'><span className="text-white hover:text-blue-300 "> {session?.user.name || session?.user?.email}</span></Link>
                     :
                     <Option />
             }
