@@ -68,6 +68,8 @@ export const GET = async (request: Request, { params }: any) => {
 
         return NextResponse.json({ message: results, comment })
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json({ error }, { status: 500 })
     }
 }

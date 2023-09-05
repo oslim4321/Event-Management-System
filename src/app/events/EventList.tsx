@@ -2,10 +2,18 @@
 import { format } from 'date-fns'
 import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
+import RegisterEventClick from './RegisterEventClick'
+import { useDispatch } from 'react-redux'
+import { getAllEvent } from '@/GlobalRedux/Features/AllEvent/SaveAllEvent'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
+const dispatch = useDispatch()
+    useEffect(() => {
+      dispatch(getAllEvent(eventData))
+    }, [])
+
     const currentDate = new Date();
     // const eventDa = new Date(data?.eventDate)
     // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
@@ -34,7 +42,8 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                                             </svg>
                                         </div>
                                         <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                                            <p className="focus:outline-none text-xs text-yellow-700"></p>
+                                            <RegisterEventClick/>
+                                            {/* <p className="focus:outline-none text-xs text-yellow-700"></p> */}
                                         </div>
                                     </div>
                                     <div className="p-4">

@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import LoadingButton from '@/components/LoadingButton';
 
 
 interface SpecialEventType {
@@ -22,6 +23,7 @@ const EventForm = () => {
     const [formData, setFormData] = useState<any>();
     const [selectedDateTime, setSelectedDateTime] = useState<Date | undefined>(undefined);
     const [inputs, setinputs] = useState<any>();
+    const [loading, setloading] = useState(false)
     const router = useRouter()
 
 
@@ -52,6 +54,7 @@ const EventForm = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
+        setloading(true)
        
         
         // post data
@@ -63,6 +66,8 @@ const EventForm = () => {
             }
         } catch (error) {
             console.log(error)
+        }finally{
+            setloading(false)
         }
     };
 
@@ -135,6 +140,9 @@ const EventForm = () => {
                                     </button>
                                 )}
                                 {currentStep === eventInput.length - 1 && (
+                                    loading ?
+                                    <LoadingButton loading={loading}/>
+                                    :
                                     <button onClick={handleSubmit} className="bg-green-500 text-white px-3 py-1 rounded">
                                         Submit
                                     </button>
