@@ -10,7 +10,6 @@ import { useTypedSelector } from '@/GlobalRedux/store';
 import {useDispatch} from 'react-redux'
 import { saveSingleEvent } from '@/GlobalRedux/Features/SingleEvent/singleEvent';
 import { SpecialEventKey, eventInput } from '../../uploadEvent/EventKey';
-import { useSession } from 'next-auth/react';
 
 interface SpecialEvent {
     [eventName: string]: string[];
@@ -18,7 +17,6 @@ interface SpecialEvent {
 
 const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: string}) => {
     const [isupdating, setisupdating] = useState(false)
-    const session: any = useSession()
 
     const dispatch = useDispatch()
     dispatch(saveSingleEvent(EventData))
@@ -30,9 +28,7 @@ const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: s
     
     const handleChange = (e: ChangeEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        // setdata((prev: typeof data) => ({ ...prev, ['eventTy`pe']: value }))
 
-        // console.log(value)
         SpecialEventKey.forEach((elem: SpecialEvent) => {
 
             if (elem[value]) {
@@ -42,69 +38,64 @@ const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: s
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+       
+
         e.preventDefault();
         setisupdating(true)
         // console.log(e.target.musicianNames.value);
-        const target = e.target as any;
-        const eventName = target.eventName.value
-        const eventType  = target.eventType.value
-        const eventDate  = target.eventDate.value
-        const eventLocation  = target.eventLocation.value
-        const organizer  = session.data.newUser._id
-        const attire  = target.attire.value
-        const guestCount  = target.guestCount.value
-        const specialInstructions  = target.specialInstructions.value
-        const eventDesc  = target.eventDesc.value
-        const image  = target.image.value
-        const musicianNames  = target?.musicianNames?.value
-        const celebrantName  = target.celebrantName?.value
-        const tributeDetails  = target.tributeDetails?.value
-        const musicGenre  = target.musicGenre?.value
-        const ticketPrice  = target.ticketPrice?.value
-
-
-        const obj = {eventType, eventName, eventDate, eventLocation, organizer, attire, guestCount,specialInstructions, eventDesc, image, musicianNames,celebrantName,tributeDetails, musicGenre,ticketPrice}
+        // const target = e.target as any;
+        // const eventName = target.eventName.value
+        // const eventType  = target.eventType.value
+        // const eventDate  = target.eventDate.value
+        // const eventLocation  = target.eventLocation.value
+        // const organizer  = session.data.newUser._id
+        // const attire  = target.attire.value
+        // const guestCount  = target.guestCount.value
+        // const specialInstructions  = target.specialInstructions.value
+        // const eventDesc  = target.eventDesc.value
+        // const image  = target.image.value
+        // const musicianNames  = target?.musicianNames?.value
+        // const celebrantName  = target.celebrantName?.value
+        // const tributeDetails  = target.tributeDetails?.value
+        // const musicGenre  = target.musicGenre?.value
+        // const ticketPrice  = target.ticketPrice?.value
+      
+        // const obj = {eventType, eventName, eventDate, eventLocation, organizer, attire, guestCount,specialInstructions, eventDesc, image, musicianNames,celebrantName,tributeDetails, musicGenre,ticketPrice}
         const nonEmptyValues = {} as any;
 
-        Object.entries(obj).forEach(([key, value]) => {
+        data && Object.entries(data).forEach(([key, value]) => {
             if (value !== '' && value !== undefined) {
                 nonEmptyValues[key] = value;
             }
         }); 
-        console.log(obj);
+
+
+        console.log(nonEmptyValues, 'data');
         
-        try{
-            console.log(params)
-            const res = await axios.patch('/api/event/UpdateEvent', {params,nonEmptyValues })
-            console.log(res);
-            router.push('/dashboard')
-            
-        }catch(error){
-            console.log(error)
-        }finally{
-            setisupdating(false)
-        }
         
         
         
         // console.log(data)
             // // Send formData to your API endpoint
-        // try {
-        //     const res: any = await axios.post('/api/event/createEvent/', data)
-        //     console.log(res)
-        //     if (res.data?.message) {
-        //         router.push('/')
-        //     }
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        try {
+            const res = await axios.patch('/api/event/UpdateEvent', {params,data: nonEmptyValues })
+            console.log(res)
+            if (res.data?.message) {
+                router.push('/dashboard')
+            }
+        } catch (error) {
+            console.log(error)
+        }finally{
+            setisupdating(false)
+        }
     };
+    
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         console.log(e.target.name, ':', e.target.value)
         const name = e.target.name
         const val = e.target.value
-        setdata((prev: typeof data) => ({ ...prev, [name]: val }))
+        setdata((prev: typeof data) => ({ ...prev, [name]: val,}))
     }
 
 
@@ -137,7 +128,7 @@ const UpdateEvent = ({EventData, params} : {EventData: EventTypeModel, params: s
                         </p>
                     )} */}
                     <SpecialEvent inputs={inputs} handleInputChange={handleInputChange} />
-                    <AllEventKeys setSelectedDateTime={setSelectedDateTime} selectedDateTime={selectedDateTime} />
+                    <AllEventKeys handleInputChange={handleInputChange}  setdata={setdata} setSelectedDateTime={setSelectedDateTime} selectedDateTime={selectedDateTime} />
 
                     {/* Add other input fields here */}
                    {isupdating ?
@@ -178,17 +169,19 @@ const SpecialEvent = ({ inputs, handleInputChange }: { inputs: string[], handleI
     )
 }
 interface AllEventKeysProps {
-    // handleInputChange: React.ChangeEventHandler;
+    handleInputChange: React.ChangeEventHandler;
     setSelectedDateTime: React.Dispatch<React.SetStateAction<Date | undefined>>;
     selectedDateTime: any
+    setdata: any
 }
 
-const AllEventKeys: React.FC<AllEventKeysProps> = ({  setSelectedDateTime, selectedDateTime }) => {
+const AllEventKeys: React.FC<AllEventKeysProps> = ({ handleInputChange, setSelectedDateTime, setdata, selectedDateTime }) => {
     const Event = useTypedSelector((state)=> state.singleEvent.data)
     
 
     const handleDateTimeChange = (date: any) => {
-        setSelectedDateTime(date);
+        // setsSelectedDateTime(date);
+        setdata((prev: any) => ({ ...prev, eventDate:date}))
     };
 
     return (
@@ -200,7 +193,7 @@ const AllEventKeys: React.FC<AllEventKeysProps> = ({  setSelectedDateTime, selec
 
             </div>
           {eventInput
-                .filter(event => event.name !== 'eventType') // Filter out the object with name 'eventType'
+                .filter(event => event.name !== 'eventType' && event.name !== 'eventDate') // Filter out the object with name 'eventType'
                 .map((event) => (
                 < div className="mb-4" key={event.name}>
 
@@ -208,12 +201,12 @@ const AllEventKeys: React.FC<AllEventKeysProps> = ({  setSelectedDateTime, selec
                         event.name === 'eventDesc' ?
                             <div>
                                 <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
-                                <textarea name={event.name} defaultValue={Event[event.name]} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"  cols={parseInt("30")} rows={parseInt("10")}></textarea>
+                                <textarea name={event.name} defaultValue={Event[event.name]} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange}  cols={parseInt("30")} rows={parseInt("10")}></textarea>
                             </div>
                             :
                             <div>
                                 <label className="block text-gray-700 font-semibold mb-1 capitalize">{event.title}</label>
-                                <input type="text" name={event.name} defaultValue={Event[event.name]} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"  />
+                                <input type="text" name={event.name} defaultValue={Event[event.name]} className="w-full p-2 border rounded focus:outline-none focus:border-blue-500" onChange={handleInputChange}  />
                             </div>
 
                     }

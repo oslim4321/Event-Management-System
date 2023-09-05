@@ -10,9 +10,11 @@ export const fetchSingleEvent = async(id: string)=>{
         return event.data
 
     } catch (error) {
-        throw Error("failed to fetch data");
+        console.log(error);
+        
+        // throw new Error("failed to fetch data");
 
-        // return error
+        return error
         // throw Error('failed fetch data on')
     }
 }

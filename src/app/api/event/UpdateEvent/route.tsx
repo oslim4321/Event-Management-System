@@ -5,10 +5,11 @@ import { NextResponse } from "next/server"
 export const PATCH = async(request: Request)=>{
     try{
         await connect()
-        const {nonEmptyValues, params} = await request.json()
+        const {data, params} = await request.json()
+    
         const updatedData = await Event.findByIdAndUpdate(
             params,
-            nonEmptyValues,
+            data,
             { new: true }
         )
         return NextResponse.json({message:updatedData})

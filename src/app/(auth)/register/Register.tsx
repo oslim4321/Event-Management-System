@@ -1,4 +1,5 @@
 "use client"
+import LoadingButton from '@/components/LoadingButton'
 import SignUpWithGoggleCompo from '@/components/SignUpWithGoggleCompo'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -10,6 +11,7 @@ export type DataState = {
 const Register = () => {
   const route = useRouter()
   const [data, setdata] = useState<DataState>({})
+  const [loading, setloading] = useState(false)
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const name = e.target.name
@@ -19,6 +21,7 @@ const Register = () => {
 
   async function handleSubmit(e: FormEvent<HTMLElement>) {
     e.preventDefault()
+    setloading(true)
     try {
       const res = await axios.post(`/api/auth/register`, data)
       // console.log(res)
@@ -27,6 +30,9 @@ const Register = () => {
       }
     } catch (error) {
       console.log(error)
+    }finally{
+      setloading(false)
+
     }
   }
   return (
@@ -54,7 +60,14 @@ const Register = () => {
             <div className="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
               <input type="password" onChange={handleChange} name='password' placeholder="Password" className="my-3 w-full border-none bg-transparent outline-none focus:outline-none" />
             </div>
-            <button className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400">CREATE ACCOUNT</button>
+            {
+              loading
+              ?
+              <LoadingButton loading={loading}/>
+              :
+              <button className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-blue-500 py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400">CREATE ACCOUNT</button>
+
+            }
           </form>
 
 

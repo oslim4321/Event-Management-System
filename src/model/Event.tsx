@@ -46,6 +46,9 @@ const eventSchema = new mongoose.Schema(
         specialInstructions: {
             type: String,
         },
+        entryFee:{
+            type: Number
+        },
         // Fields specific to Birthday
         celebrantName: {
             type: String,
