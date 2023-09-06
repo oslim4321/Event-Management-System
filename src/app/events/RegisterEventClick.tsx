@@ -1,11 +1,25 @@
 import { useTypedSelector } from '@/GlobalRedux/store'
-import React from 'react'
+import { EventTypeModel } from '@/utils/typescriptModel'
+import React, { useEffect } from 'react'
 
 const RegisterEventClick = () => {
-    const event = useTypedSelector((state)=> state)
+    // const {data} = useTypedSelector((state)=> state.AllEvent)
+    // let event
+
+    // function handleClick(){
+      
+    //   data.filter((elem: EventTypeModel)=> {
+    //     if(elem._id === "64d31c4045143146989") {
+    //       event = elem
+    //     }
+    //   })
+    // }
+    // console.log(event);
+    
+    
   return (
     <div>
-        <button className='text-xm'>Register</button>
+        <button  className='text-xm'>Register</button>
     </div>
   )
 }

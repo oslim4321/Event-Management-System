@@ -1,12 +1,15 @@
 "use client"
 import { format } from 'date-fns'
+import axios from 'axios'
 import { ImgComp } from '@/components/ImageComp'
 import { EventTypeModel } from '@/utils/typescriptModel'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import RegisterEventClick from './RegisterEventClick'
 import { useDispatch } from 'react-redux'
 import { getAllEvent } from '@/GlobalRedux/Features/AllEvent/SaveAllEvent'
+import RegisterEventModal from './RegisterEventModal'
+import { saveSingleEvent } from '@/GlobalRedux/Features/SingleEvent/singleEvent'
 
 const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
 const dispatch = useDispatch()
@@ -18,8 +21,29 @@ const dispatch = useDispatch()
     // const eventDa = new Date(data?.eventDate)
     // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
     // console.log(dd, 'dd')
+    const [eventRegiId, seteventRegiId] = useState('')
+    const registerEventClick = async(id : string)=>{
+        seteventRegiId(id)
+     
+      eventData?.map((elem : any)=>{
+        if(elem._id === id){
+           dispatch(saveSingleEvent(elem))
+        }
+      })
+      
+        // try {
+        //     const data = await axios.post('/api/event/registeredEvents', {id})
+        //     console.log(data);
+            
+        // } catch (error: any) {
+        //     console.log(error);
+            
+        // }
+        
+    }
     return (
         <div>
+            {eventRegiId ?<RegisterEventModal seteventRegiId={seteventRegiId}/> : ''}
             <div className="focus:outline-none">
                 {/* <!-- Remove py-8 --> */}
                 <div className="mx-auto container py-8">
@@ -42,7 +66,7 @@ const dispatch = useDispatch()
                                             </svg>
                                         </div>
                                         <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                                            <RegisterEventClick/>
+                                        <button onClick={()=>registerEventClick(elem._id)} className='text-xm'>Register</button>
                                             {/* <p className="focus:outline-none text-xs text-yellow-700"></p> */}
                                         </div>
                                     </div>
