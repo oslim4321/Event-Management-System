@@ -1,18 +1,23 @@
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { handler } from "@/app/api/auth/[...nextauth]/route";
 import { Option } from "./HeaderOption";
-import Link from "next/link";
-import NavBarUlList from "./NavBarUlList";
+import { getSession } from "next-auth/react";
+import NavList from "./NavList";
 
 const Header = () => {
   return (
     <nav className="bg-blue-500 p-4">
-      <li>
-        <NavBarUlList />
-        {/* @ts-ignore */}
+      <div className="flex max-w-[80%] mx-auto">
+        <Link href="/">
+          <span className="text-white font-semibold text-xl mb-2 md:mb-0 md:mr-4">
+            EventManager
+          </span>
+        </Link>
+        <NavList />
+        {/*  @ts-ignore */}
         <User />
-        {/* <Option /> */}
-      </li>
+      </div>
     </nav>
   );
 };
@@ -26,6 +31,7 @@ const User = async () => {
       {session ? (
         <Link href="dashboard">
           <span className="text-white hover:text-blue-300 ">
+            {" "}
             {session?.user.name || session?.user?.email}
           </span>
         </Link>

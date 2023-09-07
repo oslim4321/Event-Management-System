@@ -21,6 +21,8 @@ const getData = async () => {
         return data?.data?.message
     } catch (error) {
         console.log(error)
+        console.log(error);
+        
         throw new Error('failed fetch data on')
     }
 }

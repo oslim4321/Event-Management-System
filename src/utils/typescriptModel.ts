@@ -31,8 +31,10 @@ export type EventTypeModel = {
   eventDesc: string;
   firstName?: string;
   lastName?: string;
-  userID?: string
+  userID?: string,
+  ticketPrice?: number
   __v?: number;
+  map: any
   
 };
 export type serverUser = {

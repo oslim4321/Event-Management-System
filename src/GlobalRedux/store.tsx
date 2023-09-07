@@ -4,11 +4,13 @@ import {configureStore} from '@reduxjs/toolkit'
 import counterSlice from './Features/CounterSlice/counterSlice'
 import { useSelector, TypedUseSelectorHook } from 'react-redux';
 import singleEvent from './Features/SingleEvent/singleEvent';
+import SaveAllEvent from './Features/AllEvent/SaveAllEvent';
 
 export const store : any = configureStore({
     reducer:{
        counter: counterSlice,
-       singleEvent: singleEvent
+       singleEvent: singleEvent,
+       AllEvent: SaveAllEvent
     }
 })
 

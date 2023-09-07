@@ -1,12 +1,13 @@
+"use client"
 import React from 'react'
 
 const Herosection = () => {
   return (
     <div className="h-[70vh] bg-blue-500">
       <div className="bg-blue-500 text-white py-16">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between sm:px-8 px-2 ">
-          <div className="md:w-1/2 md:text-left sm:px-8 px-4 ">
-            <h1 className=" text-xl sm:text-4xl md:text-5xl font-bold">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between sm:px-6 px-2">
+          <div className="md:w-1/2 md:text-left px-4 ">
+            <h1 className=" text-xl sm:text-4xl md:text-5xl font-bold lg:pr-8">
               A Smart way to Reach the right Career with Wemet
             </h1>
             <p className="mt-4 text-lg md:text-xl">Whatever you are looking to do this year</p>

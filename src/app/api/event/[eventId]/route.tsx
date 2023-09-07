@@ -68,6 +68,27 @@ export const GET = async (request: Request, { params }: any) => {
 
         return NextResponse.json({ message: results, comment })
     } catch (error) {
+        console.log(error);
+        
         return NextResponse.json({ error }, { status: 500 })
+    }
+}
+
+
+export const DELETE = async(request: Request, {params} : any)=>{
+    const {eventId} = params
+    console.log('log event came');
+    
+    try {
+        console.log(eventId);
+        
+        await connect()
+        const res = await Event.findOneAndDelete({_id: eventId})
+        if (!res) {
+            return NextResponse.json({error: 'cant delete', status: 404})
+        }
+        return NextResponse.json({message: res, status: 200})
+    } catch (error) {
+        return NextResponse.json({error, status: 500})
     }
 }

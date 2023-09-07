@@ -9,7 +9,6 @@ import Comment from './Comment'
 import ReadComments from './ReadComments'
 
 const FullEvent = ({ data, comment }: { data: EventTypeModel, comment: Comment }) => {
-    console.log(comment, 'yesh me')
     const currentDate = new Date();
     const eventDa = new Date(data?.eventDate)
 

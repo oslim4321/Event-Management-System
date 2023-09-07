@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link';
 import axios from 'axios';
 import EventList from './EventList';
+import { getServerSession } from 'next-auth';
+import { handler } from '../api/auth/[...nextauth]/route';
 
 
 type UserSch = {
@@ -31,7 +33,7 @@ const page = async () => {
 
     const { data } = await getData()
 
-    // const session: any = await getServerSession(handler)
+    const session: any = await getServerSession(handler)
 
     // if (!session) {
     //     // return <div className='text-center text-4xl'>Please login</div>
@@ -45,9 +47,9 @@ const page = async () => {
                 {session?.user?.email}
                 Event Page must be protected */}
 
-                <div className='flex justify-end'>
+                {session ?<div className='flex justify-end'>
                     <Link href='/events/uploadEvent'><button className='py-2 px-3 border'>Create Your Event</button></Link>
-                </div>
+                </div> : ''}
                 {/* <EventCard eventData={data} /> */}
                 {/* My events */}
                 <EventList eventData={data} />
