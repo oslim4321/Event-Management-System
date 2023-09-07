@@ -10,7 +10,7 @@ const Header = () => {
     <nav className="bg-blue-500 p-4">
       <div className="flex max-w-[80%] mx-auto">
         <Link href="/">
-          <span className="text-white font-semibold text-xl mb-2 md:mb-0 md:mr-4">
+          <span className="text-white font-semibold text-l sm:text-xl  md:mb-0 md:mr-4">
             EventManager
           </span>
         </Link>
