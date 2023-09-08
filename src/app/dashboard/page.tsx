@@ -26,7 +26,7 @@ const getData = async () => {
     console.log(error);
     console.log(error);
 
-    throw new Error("failed fetch data on");
+    throw Error("failed fetch data on");
   }
 };
 export const metadata = {

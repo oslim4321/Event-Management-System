@@ -14,10 +14,8 @@ export const POST = async (request: Request) => {
     // get the user details from server
     const session: any = await getServerSession<any>(handler);
     // if not session that means it unAuthorize ->  loggin
-    if (!session.user) {
-      return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-      });
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized", status: 404 });
     }
     // const event.find()
     // find the event the user is registering

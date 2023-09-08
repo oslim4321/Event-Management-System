@@ -146,6 +146,8 @@ const ListMyEvent = () => {
             </div>
           </div>
         </div>
+      ) : loading ? (
+        "loading..."
       ) : (
         <p>Cant Get Any Event</p>
       )}

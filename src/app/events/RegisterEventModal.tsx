@@ -25,10 +25,13 @@ const RegisterEventModal = ({
     const user = session?.data?.newUser._id;
 
     try {
-      const data = await axios.post("/api/event/registeredEvents", {
+      const { data } = await axios.post("/api/event/registeredEvents", {
         eventId: id,
         userId: user,
       });
+      if (data.message === "Unauthorized") {
+        alert("UNKNOWN");
+      }
       console.log(data);
     } catch (error: any) {
       console.log(error);
@@ -64,25 +67,24 @@ const RegisterEventModal = ({
               <p>{format(new Date(event.eventDate), "MMM d, yyyy")}</p>
               <p>{format(new Date(event.eventDate), "HH:mm a")}</p>
 
+              <div className="p-3  mt-2 text-center space-x-4 md:block">
+                {loading ? (
+                  <LoadingButton loading={loading} />
+                ) : (
+                  <button
+                    onClick={registerEvent}
+                    className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+                  >
+                    Register
+                  </button>
+                )}
+              </div>
               <button
-                onClick={registerEvent}
                 className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+                onClick={() => seteventRegiId("")}
               >
-                Register
+                Cancel
               </button>
-            </div>
-
-            <div className="p-3  mt-2 text-center space-x-4 md:block">
-              {loading ? (
-                <LoadingButton loading={loading} />
-              ) : (
-                <button
-                  className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
-                  onClick={() => seteventRegiId("")}
-                >
-                  Cancel
-                </button>
-              )}
             </div>
           </div>
         </div>
