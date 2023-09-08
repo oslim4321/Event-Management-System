@@ -35,7 +35,7 @@ const RegisterEventModal = ({
         alert("UNKNOWN");
       }
       seteventRegiId("");
-      navigate.refresh();
+      // navigate.refresh();
       // navigate.push("dashboard");
 
       console.log(data);
