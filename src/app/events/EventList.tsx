@@ -101,26 +101,22 @@ const EventList = ({
                         </svg>
                       </div>
                       <div>
-                        {/* <div className="bg-yellow-200 py-1.5 px-6 rounded-full"> */}
-                        {eventRegisterIdArray?.includes(elem._id.trim()) ? (
-                          <div className="bg-green-200 py-1.5 px-6 rounded-full">
-                            <button
-                              onClick={() => registerEventClick(elem._id)}
-                              className="text-xm"
-                            >
-                              You register
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                            <button
-                              onClick={() => registerEventClick(elem._id)}
-                              className="text-xm"
-                            >
-                              Register
-                            </button>
-                          </div>
-                        )}
+                        <div key={elem._id}>
+                          {eventRegisterIdArray.includes(elem._id.trim()) ? (
+                            <div className="bg-green-200 py-1.5 px-6 rounded-full">
+                              <button className="text-xm">You register</button>
+                            </div>
+                          ) : (
+                            <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
+                              <button
+                                onClick={() => registerEventClick(elem._id)}
+                                className="text-xm"
+                              >
+                                Register
+                              </button>
+                            </div>
+                          )}
+                        </div>
                         {/* </div> */}
                       </div>
                     </div>

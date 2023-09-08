@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import LoadingButton from "@/components/LoadingButton";
+import { useRouter } from "next/navigation";
 
 const RegisterEventModal = ({
   seteventRegiId,
@@ -13,6 +14,7 @@ const RegisterEventModal = ({
   seteventRegiId: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const { data: event } = useTypedSelector((state) => state.singleEvent);
+  const navigate = useRouter();
   // console.log(event, "mee");
   const session = useSession();
   const [loading, setloading] = useState(false);
@@ -32,6 +34,10 @@ const RegisterEventModal = ({
       if (data.message === "Unauthorized") {
         alert("UNKNOWN");
       }
+      seteventRegiId("");
+      navigate.refresh();
+      // navigate.push("dashboard");
+
       console.log(data);
     } catch (error: any) {
       console.log(error);
@@ -67,18 +73,22 @@ const RegisterEventModal = ({
               <p>{format(new Date(event.eventDate), "MMM d, yyyy")}</p>
               <p>{format(new Date(event.eventDate), "HH:mm a")}</p>
 
-              <div className="p-3  mt-2 text-center space-x-4 md:block">
-                {loading ? (
-                  <LoadingButton loading={loading} />
-                ) : (
-                  <button
-                    onClick={registerEvent}
-                    className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
-                  >
-                    Register
-                  </button>
-                )}
-              </div>
+              {!session ? (
+                <p>Please login to Create Event</p>
+              ) : (
+                <div className="p-3  mt-2 text-center space-x-4 md:block">
+                  {loading ? (
+                    <LoadingButton loading={loading} />
+                  ) : (
+                    <button
+                      onClick={registerEvent}
+                      className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
+                    >
+                      Register
+                    </button>
+                  )}
+                </div>
+              )}
               <button
                 className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
                 onClick={() => seteventRegiId("")}
