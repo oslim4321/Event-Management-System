@@ -4,21 +4,27 @@ import { NextResponse } from "next/server";
 import { handler } from "../auth/[...nextauth]/route";
 import RegisteredEvents from "@/model/RegisteredEvents";
 import Event from "@/model/Event";
+import User from "@/model/User";
 
-export const GET = async (request: Request) => {
+export const POST = async (request: Request) => {
   try {
     await connect();
-    const session: any = await getServerSession<any>(handler);
-    console.log(session, "user");
 
-    // const events = await Event.find()
+    const { email } = await request.json();
+
+    let user;
+    if (email) {
+      user = await User.findOne({ email });
+    }
     const [events, registerEvent] = await Promise.all([
       Event.find(),
-      RegisteredEvents.find(),
+      RegisteredEvents.find({ user: user._id }).select("event"),
     ]);
 
-    return NextResponse.json({ data: events });
+    return NextResponse.json({ data: { events, registerEvent } });
   } catch (error) {
+    console.log(error);
+
     return NextResponse.json(error);
   }
 };

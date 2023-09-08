@@ -37,7 +37,7 @@ export const POST = async (request: Request) => {
 
     const res = await RegisteredEvents.create({
       user: userData._id,
-      event: checkEvent._id,
+      event: eventId,
       amountPaid: 0,
       registrationDate: currentDate,
     });

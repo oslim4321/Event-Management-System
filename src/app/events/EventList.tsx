@@ -10,13 +10,27 @@ import { getAllEvent } from "@/GlobalRedux/Features/AllEvent/SaveAllEvent";
 import RegisterEventModal from "./RegisterEventModal";
 import { saveSingleEvent } from "@/GlobalRedux/Features/SingleEvent/singleEvent";
 
-const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
+const EventList = ({
+  eventData,
+  registerEvent,
+}: {
+  eventData: EventTypeModel;
+  registerEvent: EventTypeModel;
+}) => {
   const dispatch = useDispatch();
-  console.log(eventData, "eventData");
+  console.log(eventData);
 
   useEffect(() => {
     dispatch(getAllEvent(eventData));
   }, []);
+  console.log(registerEvent);
+
+  let eventRegisterIdArray = [] as Array<string>;
+  // loop through the register event and push each id inside an array
+  registerEvent?.map((elem: any) => {
+    // console.log(elem);
+    eventRegisterIdArray.push(elem.event);
+  });
 
   const currentDate = new Date();
   // const eventDa = new Date(data?.eventDate)
@@ -33,6 +47,8 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
         }
       });
   };
+  console.log(eventRegisterIdArray);
+
   return (
     <div>
       {eventRegiId ? (
@@ -84,14 +100,28 @@ const EventList = ({ eventData }: { eventData: EventTypeModel }) => {
                           <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2"></path>
                         </svg>
                       </div>
-                      <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
-                        <button
-                          onClick={() => registerEventClick(elem._id)}
-                          className="text-xm"
-                        >
-                          Register
-                        </button>
-                        {/* <p className="focus:outline-none text-xs text-yellow-700"></p> */}
+                      <div>
+                        {/* <div className="bg-yellow-200 py-1.5 px-6 rounded-full"> */}
+                        {eventRegisterIdArray?.includes(elem._id.trim()) ? (
+                          <div className="bg-green-200 py-1.5 px-6 rounded-full">
+                            <button
+                              onClick={() => registerEventClick(elem._id)}
+                              className="text-xm"
+                            >
+                              You register
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="bg-yellow-200 py-1.5 px-6 rounded-full">
+                            <button
+                              onClick={() => registerEventClick(elem._id)}
+                              className="text-xm"
+                            >
+                              Register
+                            </button>
+                          </div>
+                        )}
+                        {/* </div> */}
                       </div>
                     </div>
                     <div className="p-4">
