@@ -19,6 +19,7 @@ const Comment = ({ event }: { event: string | undefined }) => {
       if (data.message) {
         // alert('Posted')
         router.refresh();
+        settext("");
       }
     } catch (error) {
       console.log(error);

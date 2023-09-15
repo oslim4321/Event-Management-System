@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SpecialEventKey, eventInput } from "./EventKey";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
@@ -8,6 +8,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import LoadingButton from "@/components/LoadingButton";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "@/utility/firebase";
 
 interface SpecialEventType {
   [eventName: string]: string[];
@@ -15,17 +17,27 @@ interface SpecialEventType {
 interface FormData {
   [key: string]: string;
 }
+type ImageState = File | undefined;
 
 const EventForm = () => {
   const { data }: any = useSession();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<any>();
+  const [disableButton, setdisableButton] = useState(true);
+  const [imageData, setimageData] = useState<ImageState>();
   const [selectedDateTime, setSelectedDateTime] = useState<Date | undefined>(
     undefined
   );
   const [inputs, setinputs] = useState<any>();
   const [loading, setloading] = useState(false);
   const router = useRouter();
+
+  // get the input image
+  const handleImageChange = (e: any) => {
+    setimageData(e.target.files?.[0]);
+    // const selectedImages = Array.from(e.target.files);
+    // setImages(selectedImages);
+  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,8 +71,19 @@ const EventForm = () => {
     e.preventDefault();
     setloading(true);
 
-    // post data
+    // console.log(image, image?.name);
+
+    const randomNumber = Math.floor(Math.random() * 2000);
+    const storageRef = ref(storage, `images/${imageData?.name}${randomNumber}`);
     try {
+      imageData ? await uploadBytes(storageRef, imageData) : "";
+      const downloadURL = await getDownloadURL(storageRef);
+      console.log(downloadURL);
+      setFormData((prev: any) => ({
+        ...prev,
+        image: downloadURL,
+      }));
+
       const res: any = await axios.post("/api/event/createEvent/", formData);
       console.log(res);
       if (res.data?.message) {
@@ -71,6 +94,19 @@ const EventForm = () => {
     } finally {
       setloading(false);
     }
+
+    // post data
+    // try {
+    //   const res: any = await axios.post("/api/event/createEvent/", formData);
+    //   console.log(res);
+    //   if (res.data?.message) {
+    //     router.push("/");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   (false);
+    // }
   };
 
   const currentInput = eventInput[currentStep];
@@ -78,6 +114,16 @@ const EventForm = () => {
   const handleDateTimeChange = (date: any) => {
     setSelectedDateTime(date);
   };
+  // console.log(formData);
+  // console.log(currentInput, "currentInput");
+  useEffect(() => {
+    if (formData) {
+      setdisableButton(false);
+    } else {
+      setdisableButton(true);
+    }
+  }, [formData]);
+
   return (
     <div className="max-w-md mx-auto p-4">
       {/* <h2 className="text-xl font-semibold mb-4">{currentInput.title}</h2> */}
@@ -99,6 +145,7 @@ const EventForm = () => {
                   name={currentInput.name}
                   value={formData[currentInput.name] || ""}
                   onChange={handleInputChange}
+                  // required
                   className="w-full p-2 border rounded focus:outline-none focus:border-blue-500 slide-in"
                   cols={parseInt("30")}
                   rows={parseInt("5")}
@@ -115,6 +162,7 @@ const EventForm = () => {
                 <select
                   className={`w-full p-2 border rounded focus:outline-none focus:border-blue-500 slide-in shadow`}
                   name="eventType"
+                  // required
                   onChange={handleInputChange}
                 >
                   <option value="*">Select</option>
@@ -124,11 +172,18 @@ const EventForm = () => {
                   <option value="Burial">Burial</option>
                   <option value="Other">Other</option>
                 </select>
+              ) : currentInput.type === "image" ? (
+                <input
+                  onChange={handleImageChange}
+                  type="file"
+                  className="w-full p-2 border rounded focus:outline-none focus:border-blue-500 slide-in"
+                />
               ) : (
                 <input
                   key={`input-${currentStep}`}
                   type={currentInput.type}
                   name={currentInput.name}
+                  // required
                   value={formData[currentInput.name] || ""}
                   onChange={handleInputChange}
                   className={`w-full p-2 border rounded focus:outline-none focus:border-blue-500 slide-in shadow`}
@@ -151,8 +206,11 @@ const EventForm = () => {
                 )}
                 {currentStep < eventInput.length - 1 && (
                   <button
+                    disabled={disableButton}
                     onClick={handleNext}
-                    className="bg-blue-500 text-white px-3 py-1 rounded"
+                    className={`bg-blue-500 text-white px-3 py-1 rounded ${
+                      disableButton ? "bg-gray-500" : ""
+                    }`}
                   >
                     Next
                   </button>
@@ -196,6 +254,7 @@ const SpecialEvent = ({
           </label>
           <input
             type={elem === "ticketPrice" ? "number" : "text"}
+            // required
             name={elem}
             className="w-full p-2 border rounded focus:outline-none focus:border-blue-500"
             onChange={handleInputChange}
