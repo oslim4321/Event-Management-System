@@ -18,7 +18,7 @@ export const POST = async (request: Request) => {
     }
     const [events, registerEvent] = await Promise.all([
       Event.find(),
-      RegisteredEvents.find({ user: user._id }).select("event"),
+      RegisteredEvents.find({ user: user?._id }).select("event"),
     ]);
 
     return NextResponse.json({ data: { events, registerEvent } });

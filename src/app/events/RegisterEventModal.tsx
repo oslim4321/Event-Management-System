@@ -25,7 +25,7 @@ const RegisterEventModal = ({
     const id = event._id;
     // @ts-ignore
     const user = session?.data?.newUser._id;
-    console.log(session, "the user onlimne");
+    // console.log(session, "the user onlimne");
 
     try {
       const { data } = await axios.post("/api/event/registeredEvents", {
@@ -36,7 +36,7 @@ const RegisterEventModal = ({
         alert("UNKNOWN");
       }
       seteventRegiId("");
-      // navigate.refresh();
+      navigate.refresh();
       // navigate.push("dashboard");
 
       console.log(data);

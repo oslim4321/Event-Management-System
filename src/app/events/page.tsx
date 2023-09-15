@@ -31,8 +31,9 @@ export const metadata = {
     "Stay up-to-date with the latest upcoming events and never miss out on exciting experiences. Explore a curated selection of upcoming events that cater to your interests and preferences. Don't let outdated information hold you back – discover the most relevant and engaging events waiting for you.",
 };
 const page = async () => {
-  const { user }: any = await getServerSession(handler);
-  const { data } = await getData(user.email);
+  const session: any = await getServerSession(handler);
+  // if
+  const { data } = await getData(session?.user?.email);
   //   console.log(data);
 
   //   console.log(session, "mememe");
@@ -48,7 +49,7 @@ const page = async () => {
                 {session?.user?.email}
                 Event Page must be protected */}
 
-        {user ? (
+        {session?.user ? (
           <div className="flex justify-end">
             <Link href="/events/uploadEvent">
               <button className="py-2 px-3 border">Create Your Event</button>
@@ -59,7 +60,10 @@ const page = async () => {
         )}
         {/* <EventCard eventData={data} /> */}
         {/* My events */}
-        <EventList eventData={data.events} registerEvent={data.registerEvent} />
+        <EventList
+          eventData={data?.events}
+          registerEvent={data?.registerEvent}
+        />
       </div>
     </div>
   );

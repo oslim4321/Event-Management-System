@@ -28,7 +28,7 @@ const User = async () => {
   return (
     <div>
       {session ? (
-        <Link href="dashboard">
+        <Link href="/dashboard">
           <span className="text-white hover:text-blue-300 ">
             {" "}
             {session?.user.name || session?.user?.email}

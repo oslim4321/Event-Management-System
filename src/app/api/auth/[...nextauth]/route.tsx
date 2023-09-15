@@ -59,7 +59,7 @@ export const handler = NextAuth({
 
 
         } catch (error) {
-          console.error(error);
+          console.log(error);
           return null
           // throw new Error(error as string);
         }
