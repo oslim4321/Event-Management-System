@@ -22,7 +22,7 @@ const getData = async (email: string) => {
     return res?.data;
   } catch (error) {
     console.log(error, "error");
-    throw Error("failed fetch data on");
+    // throw Error("failed fetch data on");
   }
 };
 export const metadata = {
@@ -33,7 +33,7 @@ export const metadata = {
 const page = async () => {
   const session: any = await getServerSession(handler);
   // if
-  const { data } = await getData(session?.user?.email);
+  const data = await getData(session?.user?.email);
   //   console.log(data);
 
   //   console.log(session, "mememe");
@@ -60,10 +60,12 @@ const page = async () => {
         )}
         {/* <EventCard eventData={data} /> */}
         {/* My events */}
-        <EventList
-          eventData={data?.events}
-          registerEvent={data?.registerEvent}
-        />
+        {data && (
+          <EventList
+            eventData={data?.data?.events}
+            registerEvent={data?.data?.registerEvent}
+          />
+        )}
       </div>
     </div>
   );

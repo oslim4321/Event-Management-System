@@ -1,5 +1,5 @@
 import Event from "@/model/Event";
-import RegisteredEvents from "@/model/RegisteredEvents";
+import RegisteredEvents from "@/model/RegisteredEvent";
 import connect from "@/utils/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -38,8 +38,8 @@ export const POST = async (request: Request) => {
     const res = await RegisteredEvents.create({
       user: userData._id,
       event: eventId,
-      eventName: userData.eventName,
-      img: userData.image,
+      eventName: checkEvent.eventName,
+      img: checkEvent.image,
       amountPaid: 0,
       registrationDate: currentDate,
     });

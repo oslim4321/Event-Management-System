@@ -40,7 +40,7 @@ const ListMyEvent = () => {
 
   useEffect(() => {
     handleFetchData();
-  }, []);
+  }, [session]);
 
   const handleDelEvent = (id: string | undefined) => {
     seteventDelId(id);

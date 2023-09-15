@@ -1,5 +1,5 @@
 import Event from "@/model/Event";
-import RegisteredEvents from "@/model/RegisteredEvents";
+import RegisteredEvents from "@/model/RegisteredEvent";
 import connect from "@/utils/db";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";

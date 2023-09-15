@@ -37,5 +37,5 @@ const RegisteredEvents = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.models.RegisteredEvents ||
-  mongoose.model("RegisteredEvents", RegisteredEvents);
+export default mongoose.models.RegisteredEventSchema ||
+  mongoose.model("RegisteredEventSchema", RegisteredEvents);

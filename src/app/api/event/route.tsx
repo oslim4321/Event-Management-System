@@ -2,7 +2,7 @@ import connect from "@/utils/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { handler } from "../auth/[...nextauth]/route";
-import RegisteredEvents from "@/model/RegisteredEvents";
+import RegisteredEvents from "@/model/RegisteredEvent";
 import Event from "@/model/Event";
 import User from "@/model/User";
 
