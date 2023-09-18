@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import LoadingButton from "@/components/LoadingButton";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/utility/firebase";
+import { tr } from "date-fns/locale";
 
 interface SpecialEventType {
   [eventName: string]: string[];
@@ -66,6 +67,26 @@ const EventForm = () => {
   const handlePrevious = () => {
     setCurrentStep((prevStep) => prevStep - 1);
   };
+  const uploadmageToFireStorage = async () => {
+    try {
+      const randomNumber = Math.floor(Math.random() * 2000);
+      const storageRef = ref(
+        storage,
+        `images/${imageData?.name}${randomNumber}`
+      );
+
+      if (imageData) {
+        await uploadBytes(storageRef, imageData);
+        const downloadURL = await getDownloadURL(storageRef);
+        return downloadURL;
+      } else {
+        return null; // Return null if imageData is undefined
+      }
+    } catch (error) {
+      console.log("image upload error", error);
+      return error;
+    }
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -73,18 +94,11 @@ const EventForm = () => {
 
     // console.log(image, image?.name);
 
-    const randomNumber = Math.floor(Math.random() * 2000);
-    const storageRef = ref(storage, `images/${imageData?.name}${randomNumber}`);
     try {
-      imageData ? await uploadBytes(storageRef, imageData) : "";
-      const downloadURL = await getDownloadURL(storageRef);
-      console.log(downloadURL);
-      setFormData((prev: any) => ({
-        ...prev,
-        image: downloadURL,
-      }));
+      const downloadURL = await uploadmageToFireStorage();
 
-      const res: any = await axios.post("/api/event/createEvent/", formData);
+      const formVal = { ...formData, image: downloadURL };
+      const res: any = await axios.post("/api/event/createEvent/", formVal);
       console.log(res);
       if (res.data?.message) {
         router.push("/");

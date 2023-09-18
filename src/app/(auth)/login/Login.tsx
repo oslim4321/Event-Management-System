@@ -20,17 +20,18 @@ const Login = () => {
     setdata((prevData) => ({ ...prevData, [name]: val }));
   }
 
-  function handleClick() {
+  async function handleClick() {
     setloading(true);
     console.log(data);
     const { email, password } = data as { email: string; password: string };
     try {
-      signIn("credentials", { email, password });
+      await signIn("credentials", { email, password });
+      setloading(false);
     } catch (error) {
       console.log(error, "from error");
       setloading(false);
     } finally {
-      // setloading(false)
+      setloading(false);
     }
   }
   if (status === "loading") {

@@ -9,6 +9,7 @@ import Link from "next/link";
 import DeleteEventComp from "./DeleteEventComp";
 import { useDispatch } from "react-redux";
 import { saveRegisterEvents } from "@/GlobalRedux/Features/RegisterEventList/RegisterEventData";
+import { ImgComp } from "@/components/ImageComp";
 
 const ListMyEvent = () => {
   const [loading, setloading] = useState(false);
@@ -48,6 +49,8 @@ const ListMyEvent = () => {
 
   return (
     <>
+      <h1 className="text-center text-5xl mt-10">Event You posted</h1>
+
       <div className="absolute">
         {eventDelId ? (
           <DeleteEventComp
@@ -71,6 +74,12 @@ const ListMyEvent = () => {
                         className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                       >
                         #
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        img
                       </th>
                       <th
                         scope="col"
@@ -109,6 +118,13 @@ const ListMyEvent = () => {
                       <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {i + 1}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          <ImgComp
+                            src={elem?.image}
+                            alt={elem?.eventName}
+                            className="w-[40px]"
+                          />
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           {elem?.eventName}
