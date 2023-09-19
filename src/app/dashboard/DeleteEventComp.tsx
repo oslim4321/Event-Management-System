@@ -24,6 +24,7 @@ const DeleteEventComp = ({ seteventDelId, eventDelId }: props) => {
       setloading(false);
     }
   };
+  console.log("i am running on mount");
   return (
     <div>
       <div
