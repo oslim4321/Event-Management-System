@@ -6,18 +6,19 @@ import NavList from "./NavList";
 
 const Header = () => {
   return (
-    <nav className="bg-blue-500 p-4x">
-      <div className="flex max-w-[80%] py-5 mx-auto">
-        <Link href="/">
-          <span className="text-white font-semibold text-l sm:text-xl  md:mb-0 md:mr-4">
-            EventManager
-          </span>
-        </Link>
-        <NavList />
-        {/*  @ts-ignore */}
-        <User />
-      </div>
-    </nav>
+    <nav className="bg-transparent bg-opacity-25 p-4x absolute w-full">
+    <div className="flex max-w-[80%] py-5 mx-auto z-30">
+      <Link href="/">
+        <span className="text-white font-semibold text-l sm:text-xl  md:mb-0 md:mr-4">
+          EventManager
+        </span>
+      </Link>
+      <NavList />
+      {/* @ts-ignore */}
+      <User />
+    </div>
+  </nav>
+  
   );
 };
 
