@@ -16,7 +16,7 @@ const Herosection = () => {
     }
   }
   return (
-    <div className="h-[100vh] bg-[url('/image.png')] flex flex-col justify-center items-center text-white">
+    <div className="h-[100vh] bg-[url('/image.png')] bg-blue-500 flex flex-col justify-center items-center text-white">
     <div className="py-16">
       <div className="container mx-auto sm:px-6 px-2">
         <div className="md:w-full md:text-center px-4 flex flex-col justify-center items-center space-y-8">
@@ -39,7 +39,7 @@ const Herosection = () => {
             </button>
   
             <Link href={"/events"}>
-              <button className="bg-blue-700 hover:bg-blue-500 text-white  p-3  text-xl">
+              <button className="bg-blue-700 hover:bg-blue-500 text-white rounded p-3  text-xl">
                 Find an event
               </button>
             </Link>
