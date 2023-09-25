@@ -5,7 +5,7 @@ const AboutEv = () => {
   return (
     <div className="w-full md:h-[70vh] h-[100vh] bg-light flex justify-center items-center">
     <div className="container flex flex-col md:flex-row">
-      <div className="w-full md:w-1/2  inline-flex justify-center items-center">
+      <div className="w-full md:w-1/2  inline-flex justify-center items-center md:p-0 p-5">
         <ImgComp src="/image53.jpg" alt="event" ></ImgComp>
       </div>
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center p-5 space-y-8">

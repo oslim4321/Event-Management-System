@@ -16,9 +16,12 @@ const Herosection = () => {
     }
   }
   return (
-    <div className="h-[100vh] bg-[url('/image.png')] bg-blue-500 flex flex-col justify-center items-center text-white">
-    <div className="py-16">
+    <div className="h-[100vh] bg-[url('/image.png')] ">
+      <div className="bg-blue-500 bg-opacity-25 w-full h-full flex flex-col justify-center items-center text-white">
+
+    <div className="py-16  ">
       <div className="container mx-auto sm:px-6 px-2">
+     
         <div className="md:w-full md:text-center px-4 flex flex-col justify-center items-center space-y-8">
           <p className="text-lg sm:text-lg md:text-2xl  font-canv uppercase">
             Your Journey Begins here
@@ -46,6 +49,7 @@ const Herosection = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
   
