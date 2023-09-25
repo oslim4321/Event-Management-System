@@ -1,0 +1,33 @@
+/* Define a custom CSS animation for the image */
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Define a custom CSS animation for the text */
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply animations with delays to the image and text */
+  .image-animation {
+    animation: slideInFromLeft 1s ease-in-out;
+  }
+  
+  .text-animation {
+    animation: slideInFromRight 1s ease-in-out;
+  }
+  

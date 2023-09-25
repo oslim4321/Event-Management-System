@@ -3,7 +3,7 @@ import { ImgComp } from "./ImageComp";
 
 const Story = () => {
   return (
-    <div className="w-full md:h-[70vh] h-[140vh] bg-blue-800 flex justify-center items-center">
+    <div className="w-full md:h-[70vh] h-[150vh] bg-blue-800 flex justify-center items-center">
       <div className="container flex flex-col md:flex-row flex-wrap">
         <div className="w-full md:w-1/2 p-4 flex justify-center items-center">
           <div className="bg-white w-full h-[100%] md:max-w-md p-8 rounded-lg shadow-lg space-y-5">
