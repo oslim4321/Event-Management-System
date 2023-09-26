@@ -24,7 +24,8 @@ export const POST = async (request: Request) => {
     const [events, registerEvent] = await Promise.all([
       Event.find()
         .limit(perPage)
-        .skip(perPage * Number(page)),
+        .skip(perPage * Number(page))
+        .sort({ createdAt: 1 }),
       RegisteredEvents.find({ user: user?._id }).select("event"),
     ]);
 

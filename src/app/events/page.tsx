@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { handler } from "../api/auth/[...nextauth]/route";
 import { notFound } from "next/navigation";
 import Skeleton from "./Skeleton";
+import Search from "./Search";
 
 type UserSch = {
   name: string;
@@ -49,6 +50,7 @@ const page = async ({ searchParams }: any) => {
   return (
     <div>
       <div className="max-w-[80%] mx-auto">
+        <Search />
         {/* {session?.user?.name}
                 {session?.user?.email}
                 Event Page must be protected */}
