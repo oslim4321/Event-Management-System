@@ -28,7 +28,7 @@ const NavList = () => {
       <div className="md:hidden">
         <button
           onClick={toggleNav}
-          className="text-white hover:text-blue-300 focus:outline-none"
+          className="text-whitde hover:text-blue-300 focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,22 +55,22 @@ const NavList = () => {
       >
         <li>
           <Link href="/">
-            <span className="text-white hover:text-blue-300">Home</span>
+            <span className="hover:text-blue-300">Home</span>
           </Link>
         </li>
         <li>
           <Link href="/events">
-            <span className="text-white hover:text-blue-300">Events</span>
+            <span className="hover:text-blue-300">Events</span>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <span className="text-white hover:text-blue-300">About</span>
+            <span className="hover:text-blue-300">About</span>
           </Link>
         </li>
         <li>
           <Link href="/contact">
-            <span className="text-white hover:text-blue-300">Contact</span>
+            <span className="hover:text-blue-300">Contact</span>
           </Link>
         </li>
       </ul>
