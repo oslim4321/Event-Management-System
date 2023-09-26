@@ -6,14 +6,14 @@ import LogoutButton from "@/components/LogoutButton";
 import ListMyEvent from "./ListMyEvent";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import RegisterEventList from "./RegisterEventList";
+import { notFound } from "next/navigation";
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
   try {
     const session: any = await getServerSession(handler);
     if (!session) {
-      console.log("mo session");
-      throw new Error("No session please login");
+      notFound();
     }
     const email: string = session?.user?.email;
     const data: any = await axios.post(

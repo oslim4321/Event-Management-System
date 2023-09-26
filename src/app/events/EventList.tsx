@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getAllEvent } from "@/GlobalRedux/Features/AllEvent/SaveAllEvent";
 import RegisterEventModal from "./RegisterEventModal";
 import { saveSingleEvent } from "@/GlobalRedux/Features/SingleEvent/singleEvent";
+import EventNav from "./EventNav";
 
 const EventList = ({
   eventData,
@@ -47,7 +48,6 @@ const EventList = ({
         }
       });
   };
-  console.log(eventRegisterIdArray);
 
   return (
     <div>
@@ -59,6 +59,7 @@ const EventList = ({
       <div className="focus:outline-none">
         {/* <!-- Remove py-8 --> */}
         <div className="mx-auto container py-8">
+          <EventNav />
           <div className="flex flex-wrap items-center lg:justify-center gap-4 justify-center">
             {/* <!-- Card 1 --> */}
             {/* @ts-ignore */}

@@ -1,9 +1,12 @@
 import React from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import axios from "axios";
 import EventList from "./EventList";
 import { getServerSession } from "next-auth";
 import { handler } from "../api/auth/[...nextauth]/route";
+import { notFound } from "next/navigation";
+import Skeleton from "./Skeleton";
 
 type UserSch = {
   name: string;
@@ -22,6 +25,7 @@ const getData = async (email: string) => {
     return res?.data;
   } catch (error) {
     console.log(error, "error");
+    return notFound();
     // throw Error("failed fetch data on");
   }
 };
@@ -60,11 +64,18 @@ const page = async () => {
         )}
         {/* <EventCard eventData={data} /> */}
         {/* My events */}
+        {/* <Suspense fallback={<Skeleton />}>
+          <Await promise={promise}>
+            {({ movies }) => <Movies movies={movies} />}
+          </Await>
+        </Suspense> */}
         {data && (
-          <EventList
-            eventData={data?.data?.events}
-            registerEvent={data?.data?.registerEvent}
-          />
+          <Suspense fallback={<Skeleton />}>
+            <EventList
+              eventData={data?.data?.events}
+              registerEvent={data?.data?.registerEvent}
+            />
+          </Suspense>
         )}
       </div>
     </div>

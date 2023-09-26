@@ -7,6 +7,7 @@ import Event from "@/model/Event";
 import User from "@/model/User";
 
 export const POST = async (request: Request) => {
+  let perPage = 3;
   try {
     await connect();
 
@@ -17,7 +18,7 @@ export const POST = async (request: Request) => {
       user = await User.findOne({ email });
     }
     const [events, registerEvent] = await Promise.all([
-      Event.find(),
+      Event.find().limit(perPage),
       RegisteredEvents.find({ user: user?._id }).select("event"),
     ]);
 
