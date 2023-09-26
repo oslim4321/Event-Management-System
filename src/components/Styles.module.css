@@ -10,7 +10,7 @@
     }
   }
   
-  /* Define a custom CSS animation for the text */
+ 
   @keyframes slideInFromRight {
     0% {
       transform: translateX(100%);
@@ -22,7 +22,6 @@
     }
   }
   
-  /* Apply animations with delays to the image and text */
   .image-animation {
     animation: slideInFromLeft 1s ease-in-out;
   }
