@@ -14,11 +14,14 @@ type UserSch = {
   image: string;
 };
 
-const getData = async (email: string) => {
+const getData = async (email: string, page: Number) => {
   try {
-    const res: any = await axios.post(process.env.BASE_URL + "/api/event", {
-      email,
-    });
+    const res: any = await axios.post(
+      process.env.BASE_URL + `/api/event?page=${page}`,
+      {
+        email,
+      }
+    );
     if (!res?.ok) {
       console.log("error ");
     }
@@ -34,18 +37,15 @@ export const metadata = {
   description:
     "Stay up-to-date with the latest upcoming events and never miss out on exciting experiences. Explore a curated selection of upcoming events that cater to your interests and preferences. Don't let outdated information hold you back – discover the most relevant and engaging events waiting for you.",
 };
-const page = async () => {
+const page = async ({ searchParams }: any) => {
+  // query
+  const page =
+    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
+
   const session: any = await getServerSession(handler);
   // if
-  const data = await getData(session?.user?.email);
-  //   console.log(data);
+  const data = await getData(session?.user?.email, page);
 
-  //   console.log(session, "mememe");
-
-  // if (!session) {
-  //     // return <div className='text-center text-4xl'>Please login</div>
-  //     redirect('/login?callbackURL=/protected/server')
-  // }
   return (
     <div>
       <div className="max-w-[80%] mx-auto">
@@ -62,13 +62,34 @@ const page = async () => {
         ) : (
           ""
         )}
-        {/* <EventCard eventData={data} /> */}
-        {/* My events */}
-        {/* <Suspense fallback={<Skeleton />}>
-          <Await promise={promise}>
-            {({ movies }) => <Movies movies={movies} />}
-          </Await>
-        </Suspense> */}
+
+        {/* link */}
+        <Link
+          href={{
+            pathname: "/events",
+            query: {
+              page: page > 1 ? page - 1 : 1,
+            },
+          }}
+          className={`rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800 ${
+            page <= 1 ? "pointer-events-none opacity-50" : ""
+          }`}
+        >
+          Previous
+        </Link>
+        {/* next */}
+        <Link
+          href={{
+            pathname: "/events",
+            query: {
+              page: page + 1,
+            },
+          }}
+          className="rounded border bg-gray-100 px-3 py-1 text-sm text-gray-800"
+        >
+          Next
+        </Link>
+
         {data && (
           <Suspense fallback={<Skeleton />}>
             <EventList

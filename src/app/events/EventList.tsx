@@ -59,7 +59,7 @@ const EventList = ({
       <div className="focus:outline-none">
         {/* <!-- Remove py-8 --> */}
         <div className="mx-auto container py-8">
-          <EventNav />
+          {/* <EventNav /> */}
           <div className="flex flex-wrap items-center lg:justify-center gap-4 justify-center">
             {/* <!-- Card 1 --> */}
             {/* @ts-ignore */}
