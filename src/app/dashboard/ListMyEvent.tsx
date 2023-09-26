@@ -47,6 +47,7 @@ const ListMyEvent = () => {
     seteventDelId(id);
   };
 
+  if (loading) return <Spinner loading={loading} />;
   return (
     <>
       <h1 className="text-center text-5xl mt-10">Event You posted</h1>
@@ -60,7 +61,7 @@ const ListMyEvent = () => {
         ) : null}
       </div>
       {/* <button onClick={handleFetchData}>See my Events</button> */}
-      <Spinner loading={loading} />
+      {/* <Spinner loading={loading} /> */}
       {!loading && data.length > 1 ? (
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5 h-[300px] overflow-y-scroll">

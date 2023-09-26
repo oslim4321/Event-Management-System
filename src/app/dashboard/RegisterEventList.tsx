@@ -23,6 +23,7 @@ const RegisterEventList = () => {
   );
   console.log(RegisterEvent, "oeoeo");
 
+  if (RegisterEvent.length < 1) return null;
   return (
     <>
       <h1 className="text-center text-5xl mt-10">Event You Register For</h1>
