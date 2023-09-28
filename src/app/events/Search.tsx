@@ -34,9 +34,10 @@ const Search = ({ search }: { search: string }) => {
           className="w-[20%] h-10 focus:outline-none text-sky-500 rounded px-2 md:px-3 py-0 md:py-1 tracking-wider"
         >
           <option value="All">All</option>
-          <option value="Freemium">Freemium</option>
-          <option value="Free">Free</option>
-          <option value="Paid">Paid</option>
+          <option value="Freemium">Wedding</option>
+          <option value="Free">Musical</option>
+          <option value="Paid">Burial</option>
+          <option value="Paid">Others</option>
         </select>
       </div>
     </div>
