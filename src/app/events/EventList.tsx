@@ -74,6 +74,8 @@ const EventList = ({
                   <ImgComp
                     src={elem.image}
                     alt={elem?.eventName}
+                    width={300}
+                    height={300}
                     className="w-full h-[200px] object-cover"
                   />
                 </div>

@@ -7,14 +7,21 @@ import Event from "@/model/Event";
 import User from "@/model/User";
 
 export const POST = async (request: Request) => {
-  console.log(request.url);
-
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page");
-  let perPage = 3;
+  const search = searchParams.get("search");
+
+  let limit = 3;
+  const skip = (Number(page) - 1) * limit;
   try {
     await connect();
-
+    const searchFilter = {
+      $text: {
+        $search: search || "",
+        $caseSensitive: false, // Case-insensitive search
+        $diacriticSensitive: false, // Accent-insensitive search
+      },
+    }; // Empty filter if search is not provided
     const { email } = await request.json();
 
     let user;
@@ -22,9 +29,9 @@ export const POST = async (request: Request) => {
       user = await User.findOne({ email });
     }
     const [events, registerEvent] = await Promise.all([
-      Event.find()
-        .limit(perPage)
-        .skip(perPage * Number(page))
+      Event.find(search ? searchFilter : {})
+        .limit(limit)
+        .skip(skip)
         .sort({ createdAt: 1 }),
       RegisteredEvents.find({ user: user?._id }).select("event"),
     ]);
