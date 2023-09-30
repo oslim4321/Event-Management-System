@@ -16,7 +16,7 @@ const AboutEv = () => {
     >
       <div className="container flex flex-col md:flex-row">
         <div
-          className={`w-full md:w-1/2 inline-flex justify-center items-center md:p-0 p-5 ${inView ? styles["image-animation"] : ""}`}
+          className={`w-full md:w-1/2 inline-flex  justify-center items-center md:p-0 p-5 ${inView ? styles["image-animation"] : ""}`}
         >
           <ImgComp src="/image53.jpg" alt="event" />
         </div>
