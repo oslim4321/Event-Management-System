@@ -21,17 +21,21 @@ const Login = () => {
   }
 
   async function handleClick() {
-    setloading(true);
     console.log(data);
     const { email, password } = data as { email: string; password: string };
-    try {
-      await signIn("credentials", { email, password });
-      setloading(false);
-    } catch (error) {
-      console.log(error, "from error");
-      setloading(false);
-    } finally {
-      setloading(false);
+    if (!email && !password) {
+      return alert("fill details");
+    } else {
+      setloading(true);
+      try {
+        await signIn("credentials", { email, password });
+        setloading(false);
+      } catch (error) {
+        console.log(error, "from error");
+        setloading(false);
+      } finally {
+        setloading(false);
+      }
     }
   }
   if (status === "loading") {
@@ -42,12 +46,13 @@ const Login = () => {
     return (
       <div>
         {/* <!-- login content --> */}
-        <div className="absolute left-1/2 top-1/2 mx-auto md:max-w-sm -translate-x-1/2 -translate-y-1/2 transform space-y-4 text-center">
+        <form className="absolute left-1/2 top-1/2 mx-auto md:max-w-sm -translate-x-1/2 -translate-y-1/2 transform space-y-4 text-center">
           <div className="space-y-4">
             <header className="mb-3 text-2xl font-bold">Log in</header>
             <div className="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
               <input
                 type="text"
+                required
                 placeholder="Email or username"
                 name="email"
                 className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
@@ -57,6 +62,7 @@ const Login = () => {
             <div className="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
               <input
                 type="password"
+                required
                 placeholder="Password"
                 name="password"
                 className="my-3 w-full border-none bg-transparent outline-none"
@@ -81,7 +87,7 @@ const Login = () => {
             )}
           </div>
           <SignUpWithGoggleCompo />
-        </div>
+        </form>
       </div>
     );
   router.push("/");

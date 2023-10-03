@@ -10,6 +10,7 @@ export const POST = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const page = searchParams.get("page");
   const search = searchParams.get("search");
+  const category = searchParams.get("category") || "";
 
   let limit = 3;
   const skip = (Number(page) - 1) * limit;
@@ -29,7 +30,9 @@ export const POST = async (request: Request) => {
       user = await User.findOne({ email });
     }
     const [events, registerEvent] = await Promise.all([
-      Event.find(search ? searchFilter : {})
+      Event.find(
+        search ? searchFilter : category ? { eventType: category } : {}
+      )
         .limit(limit)
         .skip(skip)
         .sort({ createdAt: 1 }),

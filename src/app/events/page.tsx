@@ -16,10 +16,16 @@ type UserSch = {
   image: string;
 };
 
-const getData = async (email: string, page: Number, search: string) => {
+const getData = async (
+  email: string,
+  page: Number,
+  search: string,
+  category: string
+) => {
   try {
     const res: any = await axios.post(
-      process.env.BASE_URL + `/api/event?page=${page}&search=${search}`,
+      process.env.BASE_URL +
+        `/api/event?page=${page}&search=${search}&category=${category}`,
       {
         email,
       }
@@ -45,10 +51,12 @@ const page = async ({ searchParams }: any) => {
     typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
   const search =
     typeof searchParams.search === "string" ? searchParams.search : "";
+  const category =
+    typeof searchParams.category === "string" ? searchParams.category : "";
 
   const session: any = await getServerSession(handler);
   // if
-  const data = await getData(session?.user?.email, page, search);
+  const data = await getData(session?.user?.email, page, search, category);
 
   return (
     <div>
@@ -57,7 +65,7 @@ const page = async ({ searchParams }: any) => {
           {/* <FilterPage /> */}
 
           <div className="flex-1">
-            <Search search={search} />
+            <Search search={search} cat={category} />
           </div>
           {/* {session?.user?.name}
                 {session?.user?.email}
