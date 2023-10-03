@@ -43,7 +43,7 @@ const RegisterEventList = () => {
                 src={elem?.img}
                 alt={elem?.eventName}
                 className="w-[80px] h-[80px] rounded-full"
-                width="200"
+                width={200}
               />
 
               <div className="flex flex-col justify-between p-4 leading-normal">
