@@ -15,7 +15,7 @@ const Choose = () => {
         className="w-full h-40 object-cover rounded-t-lg"
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold text-center">Expertise 1</h2>
+        <h2 className="text-xl font-semibold text-center">Expertise </h2>
         <p className="text-gray-700 mt-2 text-center">
           Our team brings a wealth of experience and expertise to the table. We've successfully orchestrated a wide range of events, from intimate gatherings to large-scale extravaganzas.
         </p>
@@ -31,9 +31,9 @@ const Choose = () => {
         className="w-full h-40 object-cover rounded-t-lg"
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold text-center">Expertise 2</h2>
+        <h2 className="text-xl font-semibold text-center">Attention to Detail</h2>
         <p className="text-gray-700 mt-2 text-center">
-          Our team brings a wealth of experience and expertise to the table. We've successfully orchestrated a wide range of events, from intimate gatherings to large-scale extravaganzas.
+        Our team brings a wealth of experience and expertise to the table. We've successfully orchestrated a wide range of events, from intimate gatherings to large-scale extravaganzas.
         </p>
       </div>
     </div>
