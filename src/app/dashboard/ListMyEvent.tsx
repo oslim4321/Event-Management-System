@@ -50,7 +50,7 @@ const ListMyEvent = () => {
   if (loading) return <Spinner loading={loading} />;
   return (
     <>
-      <h1 className="text-center text-5xl mt-10">Event You posted</h1>
+      {/* <h1 className="text-center text-5xl mt-10">Event You posted</h1> */}
 
       <div className="absolute">
         {eventDelId ? (
@@ -64,11 +64,11 @@ const ListMyEvent = () => {
       {/* <Spinner loading={loading} /> */}
       {!loading && data.length > 1 ? (
         <div className="flex flex-col">
-          <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5 h-[300px] overflow-y-scroll">
+          <div className=" sm:mx-0.5 lg:mx-0.5 ">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               <div className="overflow-hidden">
                 <table className="min-w-full">
-                  <thead className="bg-gray-200 border-b">
+                  <thead className=" border-b">
                     <tr>
                       <th
                         scope="col"
@@ -116,7 +116,7 @@ const ListMyEvent = () => {
                   </thead>
                   {data.map((elem: EventTypeModel, i) => (
                     <tbody key={elem._id}>
-                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                      <tr className=" border-b transition duration-300 ease-in-out hover:bg-gray-100">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {i + 1}
                         </td>

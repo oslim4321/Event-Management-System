@@ -7,6 +7,7 @@ import ListMyEvent from "./ListMyEvent";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import RegisterEventList from "./RegisterEventList";
 import { notFound } from "next/navigation";
+import EvenrPosterDashboard from "./EvenrPosterDashboard";
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
@@ -81,7 +82,7 @@ const page = async () => {
                                 type="text" value="Admin" readOnly />
                         </div> */}
             </div>
-            <div className="md:col-span-3 h-48 shadow-xl p-4 space-y-2 hidden md:block">
+            {/* <div className="md:col-span-3 h-48 shadow-xl p-4 space-y-2 hidden md:block">
               <h3 className="font-bold uppercase"> Profile Description</h3>
               <p className="">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
@@ -90,13 +91,14 @@ const page = async () => {
                 dignissim commodo. Etiam a aliquam tellus, et suscipit dolor.
                 Proin auctor nisi velit, quis aliquet sapien viverra a.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
+      <EvenrPosterDashboard />
 
-      <ListMyEvent />
-      <RegisterEventList />
+      {/* <ListMyEvent />
+      <RegisterEventList /> */}
     </div>
   );
 };
