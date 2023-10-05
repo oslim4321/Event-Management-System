@@ -7,7 +7,7 @@ import ListMyEvent from "./ListMyEvent";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import RegisterEventList from "./RegisterEventList";
 import { notFound } from "next/navigation";
-import EvenrPosterDashboard from "./EvenrPosterDashboard";
+import EventPosterDashboard from "./EventPosterDashboard";
 // import ListMyEvent from './ListMyEvent'
 
 const getData = async () => {
@@ -74,28 +74,11 @@ const page = async () => {
                   readOnly
                 />
               </div>
-              {/* <div className="flex ">
-                            <span
-                                className="text-sm border bg-blue-50 font-bold uppercase border-2 rounded-l px-4 py-2 bg-gray-50 whitespace-no-wrap w-2/6">Role:</span>
-                            <input
-                                className="px-4 border-l-0 cursor-default border-gray-300 focus:outline-none  rounded-md rounded-l-none shadow-sm -ml-1 w-4/6"
-                                type="text" value="Admin" readOnly />
-                        </div> */}
             </div>
-            {/* <div className="md:col-span-3 h-48 shadow-xl p-4 space-y-2 hidden md:block">
-              <h3 className="font-bold uppercase"> Profile Description</h3>
-              <p className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-                eget laoreet diam, id luctus lectus. Ut consectetur nisl ipsum,
-                et faucibus sem finibus vitae. Maecenas aliquam dolor at
-                dignissim commodo. Etiam a aliquam tellus, et suscipit dolor.
-                Proin auctor nisi velit, quis aliquet sapien viverra a.
-              </p>
-            </div> */}
           </div>
         </div>
       )}
-      <EvenrPosterDashboard />
+      <EventPosterDashboard />
 
       {/* <ListMyEvent />
       <RegisterEventList /> */}
