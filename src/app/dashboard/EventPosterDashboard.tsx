@@ -4,8 +4,10 @@ import ListMyEvent from "./ListMyEvent";
 import SideBar from "./SideBar";
 import PosterHeader from "./PosterHeader";
 import RegisterEve from "./Register";
+import RegisterEventList from "./RegisterEventList";
+import UserInfo from "./UserInfo";
 
-const EventPosterDashboard = () => {
+const EventPosterDashboard = ({ data }: any) => {
   const [bodyState, setbodyState] = useState("userInfo");
   return (
     <div>
@@ -42,7 +44,7 @@ const EventPosterDashboard = () => {
               </div>
             </div>
 
-            <SideBar setbodyState={setbodyState} />
+            <SideBar bodyState={bodyState} setbodyState={setbodyState} />
           </div>
           <div className="flex flex-col flex-1 overflow-hidden">
             <PosterHeader />
@@ -54,11 +56,11 @@ const EventPosterDashboard = () => {
 
                 <div className="mt-8"></div>
                 {bodyState === "userInfo" ? (
-                  "user data"
+                  <UserInfo data={data} />
                 ) : bodyState === "myEvent" ? (
                   <ListMyEvent />
                 ) : (
-                  <RegisterEve />
+                  <RegisterEventList />
                 )}
               </div>
             </main>

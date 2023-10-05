@@ -13,10 +13,15 @@ const SignUpWithGoggleCompo = () => {
         <hr className="w-full border border-gray-300" />
       </div>
       <footer>
-        {/* <div className="grid grid-cols-2 gap-4">
-          <a href="#" className="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-2.5 font-bold text-blue-700 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">FACEBOOK</a>
-          <div onClick={() => signIn("google")} className="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-2.5 font-bold text-blue-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">GOOGLE</div>
-        </div> */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* <a href="#" className="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-2.5 font-bold text-blue-700 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200">FACEBOOK</a> */}
+          <div
+            onClick={() => signIn("google")}
+            className="rounded-2xl border-b-2 border-b-gray-300 bg-white px-4 py-2.5 font-bold text-blue-500 ring-2 ring-gray-300 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200 w-full"
+          >
+            GOOGLE
+          </div>
+        </div>
 
         <div className="mt-8 text-sm text-gray-400">
           By signing in to ********, you agree to our

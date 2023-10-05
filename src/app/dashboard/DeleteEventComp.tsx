@@ -15,8 +15,8 @@ const DeleteEventComp = ({ seteventDelId, eventDelId }: props) => {
       console.log(res, "delete event");
       if (res) {
         seteventDelId("");
-        router.refresh();
       }
+      router.refresh();
     } catch (error) {
       console.log(error);
     } finally {

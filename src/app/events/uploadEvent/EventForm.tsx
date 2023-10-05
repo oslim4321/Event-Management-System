@@ -101,12 +101,12 @@ const EventForm = () => {
       const res: any = await axios.post("/api/event/createEvent/", formVal);
       console.log(res);
       if (res.data?.message) {
+        setloading(false);
         router.push("/");
       }
     } catch (error) {
-      console.log(error);
-    } finally {
       setloading(false);
+      console.log(error);
     }
 
     // post data
