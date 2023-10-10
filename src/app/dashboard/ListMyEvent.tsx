@@ -112,6 +112,18 @@ const ListMyEvent = () => {
                       >
                         Edit
                       </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        Empty
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        View
+                      </th>
                     </tr>
                   </thead>
                   {data.map((elem: EventTypeModel, i) => (
@@ -155,6 +167,11 @@ const ListMyEvent = () => {
                           Delete
                           {/* </Link> */}
                         </td>
+                        <Link href={"/dashboard/getMySingleEvent/" + elem._id}>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border cursor-pointer">
+                            View
+                          </td>
+                        </Link>
                       </tr>
                     </tbody>
                   ))}

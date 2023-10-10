@@ -85,7 +85,7 @@ const FullEvent = ({
               {/* <!--author avator--> */}
               <div className="font-light text-gray-600">
                 <div className="flex items-center mt-6 mb-6">
-                  <ProfileAvatar classStyle={"w-20 h-20"} />
+                  <ProfileAvatar classStyle={"w-10 h-10"} />
                   <h1 className="font-bold text-gray-700 hover:underline">
                     Posted By {data.lastName} {data.firstName}
                   </h1>

@@ -6,9 +6,13 @@ import PosterHeader from "./PosterHeader";
 import RegisterEve from "./Register";
 import RegisterEventList from "./RegisterEventList";
 import UserInfo from "./UserInfo";
+import { useSearchParams } from "next/navigation";
 
 const EventPosterDashboard = ({ data }: any) => {
-  const [bodyState, setbodyState] = useState("userInfo");
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
+
+  const [bodyState, setbodyState] = useState(page || "userInfo");
   return (
     <div>
       <div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 type props = {
   setbodyState: React.Dispatch<React.SetStateAction<string>>;
@@ -71,7 +72,8 @@ const SideBar = ({ setbodyState, bodyState }: props) => {
       </a> */}
 
       {sideBarContent.map((elem) => (
-        <a
+        <Link
+          href={`/dashboard/?page=${elem.url || "userInfo"}`}
           className={`flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100  ${
             bodyState === elem.url ? "bg-gray-700" : ""
           }`}
@@ -93,7 +95,7 @@ const SideBar = ({ setbodyState, bodyState }: props) => {
           </svg> */}
 
           <span className="mx-3">{elem.text}</span>
-        </a>
+        </Link>
       ))}
 
       {/* <a className="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
