@@ -19,24 +19,22 @@ const EventList = ({
   registerEvent: EventTypeModel;
 }) => {
   const dispatch = useDispatch();
-  console.log(eventData);
 
   useEffect(() => {
     dispatch(getAllEvent(eventData));
   }, []);
-  console.log(registerEvent);
 
   let eventRegisterIdArray = [] as Array<string>;
   // loop through the register event and push each id inside an array
   registerEvent?.map((elem: any) => {
-    // console.log(elem);
+    //
     eventRegisterIdArray.push(elem.event);
   });
 
   const currentDate = new Date();
   // const eventDa = new Date(data?.eventDate)
   // const dd = format(new Date("Wed Aug 23 2023 16:49:49 GMT+0100 (West Africa Standard Time) 'selectedDateTime"), 'MMMM d, yyyy HH:mm a')
-  // console.log(dd, 'dd')
+  //
   const [eventRegiId, seteventRegiId] = useState("");
   const registerEventClick = async (id: string) => {
     seteventRegiId(id);

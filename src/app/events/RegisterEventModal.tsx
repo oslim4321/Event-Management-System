@@ -15,7 +15,7 @@ const RegisterEventModal = ({
 }) => {
   const { data: event } = useTypedSelector((state) => state.singleEvent);
   const navigate = useRouter();
-  // console.log(event, "mee");
+  //
   const session = useSession();
   const [loading, setloading] = useState(false);
   const [eventRegisterSuccess, seteventRegisterSuccess] = useState(false);
@@ -25,7 +25,7 @@ const RegisterEventModal = ({
     const id = event._id;
     // @ts-ignore
     const user = session?.data?.newUser._id;
-    // console.log(session, "the user onlimne");
+    //
 
     try {
       const { data } = await axios.post("/api/event/registeredEvents", {
@@ -38,10 +38,7 @@ const RegisterEventModal = ({
       seteventRegiId("");
       navigate.refresh();
       // navigate.push("dashboard");
-
-      console.log(data);
     } catch (error: any) {
-      console.log(error);
     } finally {
       setloading(false);
     }

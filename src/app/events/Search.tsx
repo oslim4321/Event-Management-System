@@ -9,7 +9,6 @@ const Search = ({ search, cat }: { search: string; cat: string }) => {
   const searchParams = useSearchParams();
   const category = searchParams.get("category");
   const searchVal = searchParams.get("search");
-  console.log(category, searchVal, "category", "search");
 
   function handleSearch() {
     routeQuery("search", text);
@@ -17,11 +16,11 @@ const Search = ({ search, cat }: { search: string; cat: string }) => {
   function handleCategory(e: React.ChangeEvent<HTMLSelectElement>) {
     const selectedValue = e.target.value;
     // const searchParams = useSearchParams();
-    // console.log(searchParams);
+    //
 
     // const search = searchParams.get("search");
     // // const category = searchParams.get("category");
-    // console.log(search, "search");
+    //
 
     if (selectedValue === "all") {
       router.push(`/events`);

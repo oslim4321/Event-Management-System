@@ -21,12 +21,9 @@ const getData = async () => {
       process.env.BASE_URL + "/api/auth/getUser",
       { data: { email } }
     );
-    // console.log(data.message, 'mee')
+    //
     return data?.data?.message;
   } catch (error) {
-    console.log(error);
-    console.log(error);
-
     throw Error("failed fetch data on");
   }
 };

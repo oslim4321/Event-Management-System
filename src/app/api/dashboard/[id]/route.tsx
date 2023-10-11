@@ -6,10 +6,10 @@ import { NextResponse } from "next/server";
 
 export const GET = async (request: Request, { params }: any) => {
   const { id } = params;
-  console.log("req came in");
+
   try {
     await connect();
-    console.log(id, "event id");
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ message: "Invalid id" }, { status: 400 });
     }
@@ -19,7 +19,6 @@ export const GET = async (request: Request, { params }: any) => {
       RegisteredEvents.find({ user: id }),
     ]);
     if (!userEvent) {
-      console.log("not found");
       return NextResponse.json({ message: "No Event" }, { status: 404 });
     }
     return NextResponse.json({

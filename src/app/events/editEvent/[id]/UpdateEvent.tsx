@@ -47,7 +47,7 @@ const UpdateEvent = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setisupdating(true);
-    // console.log(e.target.musicianNames.value);
+    //
     // const target = e.target as any;
     // const eventName = target.eventName.value
     // const eventType  = target.eventType.value
@@ -75,28 +75,24 @@ const UpdateEvent = ({
         }
       });
 
-    console.log(nonEmptyValues, "data");
-
-    // console.log(data)
+    //
     // // Send formData to your API endpoint
     try {
       const res = await axios.patch("/api/event/UpdateEvent", {
         params,
         data: nonEmptyValues,
       });
-      console.log(res);
+
       if (res.data?.message) {
         router.push("/dashboard?page=myEvent");
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setisupdating(false);
     }
   };
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    console.log(e.target.name, ":", e.target.value);
     const name = e.target.name;
     const val = e.target.value;
     setdata((prev: typeof data) => ({ ...prev, [name]: val }));
@@ -163,12 +159,12 @@ const SpecialEvent = ({
   handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
 }) => {
   const Event = useTypedSelector((state) => state.singleEvent.data);
-  // console.log(event, 'it me');
+  //
 
   return (
     <div>
       {inputs?.map((elem: string) => (
-        // console.log(elem, 'element')
+        //
         <div className="mb-4" key={elem}>
           <label className="block text-gray-700 font-semibold mb-1 capitalize">
             {elem}

@@ -21,7 +21,6 @@ const Login = () => {
   }
 
   async function handleClick() {
-    console.log(data);
     const { email, password } = data as { email: string; password: string };
     if (!email && !password) {
       return alert("fill details");
@@ -31,7 +30,6 @@ const Login = () => {
         await signIn("credentials", { email, password });
         setloading(false);
       } catch (error) {
-        console.log(error, "from error");
         setloading(false);
       } finally {
         setloading(false);

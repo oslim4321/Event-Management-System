@@ -41,8 +41,6 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json({ data: { events, registerEvent } });
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json(error);
   }
 };

@@ -33,7 +33,7 @@
 //         password: { label: "Password", type: "password" }
 //       },
 //       authorize: async (credentials, req) => {
-//         console.log(credentials, 'credentials')
+//         
 //         const { email, password } = credentials as any
 
 //         try {

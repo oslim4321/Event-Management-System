@@ -21,7 +21,6 @@ const RegisterEventList = () => {
   const RegisterEvent = useTypedSelector(
     (state) => state.RegisterEventData.data
   );
-  console.log(RegisterEvent, "oeoeo");
 
   if (RegisterEvent.length < 1) return null;
   return (

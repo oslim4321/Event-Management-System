@@ -20,7 +20,7 @@ const ListMyEvent = () => {
   if (!session) {
     alert("no session");
   } else {
-    // console.log(session);
+    //
   }
   async function handleFetchData() {
     setloading(true);
@@ -29,11 +29,10 @@ const ListMyEvent = () => {
         //@ts-ignore
         "/api/dashboard/" + session?.data?.newUser?._id
       );
-      console.log(res);
+
       setdata(res.data.message.userEvent);
       dispatch(saveRegisterEvents(res.data.message.userRegisterEvent));
     } catch (error) {
-      console.log(error);
     } finally {
       setloading(false);
     }
@@ -167,7 +166,7 @@ const ListMyEvent = () => {
                           Delete
                           {/* </Link> */}
                         </td>
-                        <Link href={"/dashboard/getMySingleEvent/" + elem._id}>
+                        <Link href={"/dashboard/" + elem._id}>
                           <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border cursor-pointer">
                             View
                           </td>

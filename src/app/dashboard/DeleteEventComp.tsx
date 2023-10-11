@@ -12,19 +12,18 @@ const DeleteEventComp = ({ seteventDelId, eventDelId }: props) => {
     setloading(true);
     try {
       const res = await axios.delete("/api/event/" + eventDelId);
-      console.log(res, "delete event");
+
       if (res) {
         seteventDelId("");
       }
       router.refresh();
     } catch (error) {
-      console.log(error);
     } finally {
       seteventDelId("");
       setloading(false);
     }
   };
-  console.log("i am running on mount");
+
   return (
     <div>
       <div

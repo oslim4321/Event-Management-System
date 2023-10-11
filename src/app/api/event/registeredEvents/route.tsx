@@ -8,7 +8,7 @@ import User from "@/model/User";
 
 export const POST = async (request: Request) => {
   const { userId, eventId } = await request.json();
-  // console.log(id);
+  //
   try {
     await connect();
     // get the user details from server
@@ -24,7 +24,6 @@ export const POST = async (request: Request) => {
       Event.findById(eventId),
       User.findById(userId),
     ]);
-    console.log(checkEvent, userData, "data");
 
     // if event is not found, it should throw error
     if (!checkEvent) {
@@ -46,8 +45,6 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json({ message: res });
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json({ error });
   }
 };

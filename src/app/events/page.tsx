@@ -31,11 +31,9 @@ const getData = async (
       }
     );
     if (!res?.ok) {
-      console.log("error ");
     }
     return res?.data;
   } catch (error) {
-    console.log(error, "error");
     return notFound();
     // throw Error("failed fetch data on");
   }

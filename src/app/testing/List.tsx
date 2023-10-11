@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 const List = ({ getColor }: any) => {
-  useEffect(() => {
-    console.log("updating component unknown");
-  }, [getColor]);
+  useEffect(() => {}, [getColor]);
   return (
     <div>
       List

@@ -14,7 +14,6 @@ const Clicking = () => {
   }, [color]);
   function randomColor() {
     setcolor(Math.floor(Math.random() * 255));
-    console.log(color);
   }
 
   return (
@@ -27,7 +26,6 @@ const Clicking = () => {
         <button
           onClick={() => {
             setdark(!dark);
-            console.log(color);
           }}
         >
           Playing

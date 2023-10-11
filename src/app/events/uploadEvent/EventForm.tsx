@@ -83,7 +83,6 @@ const EventForm = () => {
         return null; // Return null if imageData is undefined
       }
     } catch (error) {
-      console.log("image upload error", error);
       return error;
     }
   };
@@ -92,44 +91,43 @@ const EventForm = () => {
     e.preventDefault();
     setloading(true);
 
-    // console.log(image, image?.name);
+    //
 
     try {
       const downloadURL = await uploadmageToFireStorage();
 
       const formVal = { ...formData, image: downloadURL };
       const res: any = await axios.post("/api/event/createEvent/", formVal);
-      console.log(res);
+
       if (res.data?.message) {
         setloading(false);
         router.push("/");
       }
     } catch (error) {
       setloading(false);
-      console.log(error);
     }
 
     // post data
     // try {
     //   const res: any = await axios.post("/api/event/createEvent/", formData);
-    //   console.log(res);
+    //
     //   if (res.data?.message) {
     //     router.push("/");
     //   }
     // } catch (error) {
-    //   console.log(error);
+    //
     // } finally {
     //   (false);
     // }
   };
 
   const currentInput = eventInput[currentStep];
-  // console.log(currentInput)
+  //
   const handleDateTimeChange = (date: any) => {
     setSelectedDateTime(date);
   };
-  // console.log(formData);
-  // console.log(currentInput, "currentInput");
+  //
+  //
   useEffect(() => {
     if (formData) {
       setdisableButton(false);
@@ -261,7 +259,7 @@ const SpecialEvent = ({
   return (
     <div>
       {inputs?.map((elem: string) => (
-        // console.log(elem, 'element')
+        //
         <div className="mb-4" key={elem}>
           <label className="block text-gray-700 font-semibold mb-1 capitalize">
             {elem}

@@ -11,7 +11,7 @@ const Comment = ({ event }: { event: string | undefined }) => {
   const router = useRouter();
   async function postComment() {
     setloading(true);
-    console.log(data);
+
     const userName = `${data?.newUser.lastName} ${data?.newUser.firstName}`;
     const comment = { text, event, user: data?.newUser?._id, userName };
     try {
@@ -22,7 +22,6 @@ const Comment = ({ event }: { event: string | undefined }) => {
         settext("");
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setloading(false);
     }
